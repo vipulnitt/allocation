@@ -108,19 +108,11 @@ exports.addNotification = catchAsyncError(async(req,res,next)=>{
 
   exports.getNotification = catchAsyncError(async(req,res,next)=>{
     connectDatabase();
-    try{
-      const notifications =process.env.DB_LOCAL_URI;
-      res.status(200).json({
-          success:true,
-          notifications
-        });
-    } catch(err){
-      res.status(200).json({
+    const notifications = await Notification.find();
+    res.status(200).json({
         success:true,
-        err
+        notifications
       });
-    }
-   
   });
 
   exports.downloadNotification = catchAsyncError(async(req,res,next)=>{
