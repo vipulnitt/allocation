@@ -5,7 +5,7 @@ const sendToken = require('../utils/jwtToken');
 const Notification = require('../models/notification');
 const fs = require('fs');
 const path = require('path');
-const connectDatabase = require('../config/database');
+
 
 exports.registerAdmin = catchAsyncError(async (req, res, next)=>{
     const {name, email, password} = req.body;
