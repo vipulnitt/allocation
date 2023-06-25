@@ -109,7 +109,7 @@ exports.addNotification = catchAsyncError(async(req,res,next)=>{
    // const notifications = await Notification.find();
     res.status(200).json({
         success:true,
-        "hello"
+        aa:"hello"
       });
   });
 
