@@ -1,0 +1,9 @@
+export const OTP_REQUEST ='OTP_REQUEST'
+export const OTP_SUCCESS ='OTP_SUCCESS'
+export const OTP_FAIL ='LOGIN_FAIL';
+
+export const OTP_VERIFY_REQUEST ='OTP_VERIFY_REQUEST'
+export const OTP_VERIFY_SUCCESS ='OTP_VERIFY_SUCCESS'
+export const OTP_VERIFY_FAIL ='OTP_VERIFY_FAIL';
+
+export const CLEAR_ERRORS ='CLEAR_ERRORS';
