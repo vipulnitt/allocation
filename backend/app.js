@@ -16,6 +16,12 @@ const formDetails = require('./routes/formDetails');
 app.get("/", (req, res) => {
     res.send("wow, it actually worked");
   });
+app.use('/api/v1',admin);
+app.use('/api/v1',user);
+app.use('/api/v1',form);
+app.use('/api/v1',formDetails);
+
+
 //middleware to handle errors
 app.use(errorMiddleware);
 module.exports = app;
