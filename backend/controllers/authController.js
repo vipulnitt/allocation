@@ -106,10 +106,10 @@ exports.addNotification = catchAsyncError(async(req,res,next)=>{
   });
 
   exports.getNotification = catchAsyncError(async(req,res,next)=>{
-    const notifications = await Notification.find();
+   // const notifications = await Notification.find();
     res.status(200).json({
         success:true,
-        notifications
+        "hello"
       });
   });
 
