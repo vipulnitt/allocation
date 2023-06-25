@@ -5,6 +5,7 @@ const sendToken = require('../utils/jwtToken');
 const Notification = require('../models/notification');
 const fs = require('fs');
 const path = require('path');
+const connectDatabase = require('../config/database');
 
 exports.registerAdmin = catchAsyncError(async (req, res, next)=>{
     const {name, email, password} = req.body;
@@ -106,6 +107,7 @@ exports.addNotification = catchAsyncError(async(req,res,next)=>{
   });
 
   exports.getNotification = catchAsyncError(async(req,res,next)=>{
+    connectDatabase();
     try{
       const notifications =process.env.DB_LOCAL_URI;
       res.status(200).json({
