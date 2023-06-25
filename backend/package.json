@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "set NODE_ENV= DEVELOPMENT&  nodemon backend/server",
-    "prod": "set NODE_ENV= PRODUCTION&  nodemon backend/server"
+    "start": "node server.js",
+    "dev": "set NODE_ENV= DEVELOPMENT&  nodemon server",
+    "prod": "set NODE_ENV= PRODUCTION&  nodemon server"
   },
   "author": "",
   "license": "ISC",
