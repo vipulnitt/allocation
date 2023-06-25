@@ -13,11 +13,6 @@ const user = require('./routes/user');
 const form = require('./routes/form');
 const formDetails = require('./routes/formDetails');
 
-app.use('/api/v1',admin);
-app.use('/api/v1',user);
-app.use('/api/v1',form);
-app.use('/api/v1',formDetails);
-
 app.get("/", (req, res) => {
     res.send("wow, it actually worked");
   });
