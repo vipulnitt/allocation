@@ -18,7 +18,7 @@ app.use('/api/v1',user);
 app.use('/api/v1',form);
 app.use('/api/v1',formDetails);
 
-app.get("/api/v1/hello", (req, res) => {
+app.get("/", (req, res) => {
     res.send("wow, it actually worked");
   });
 //middleware to handle errors
