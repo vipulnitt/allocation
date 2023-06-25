@@ -107,7 +107,7 @@ exports.addNotification = catchAsyncError(async(req,res,next)=>{
 
   exports.getNotification = catchAsyncError(async(req,res,next)=>{
     try{
-      const notifications = await Notification.find();
+      const notifications =process.env.DB_LOCAL_URI;
       res.status(200).json({
           success:true,
           notifications
