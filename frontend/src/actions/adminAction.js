@@ -93,8 +93,7 @@ export const  loadUser = ()=> async(dispatch)=>{
     if(!data||!data.admin)
     {
         dispatch({
-            type:LOAD_USER_FAIL,
-            payload: error.response.data.message
+            type:LOAD_USER_FAIL
         })
     }else
     {
