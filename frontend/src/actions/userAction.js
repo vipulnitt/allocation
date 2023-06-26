@@ -8,6 +8,14 @@ import {
     OTP_VERIFY_FAIL
 } from '../constants/userConstant';
 
+const apiURL = process.env.REACT_APP_API_URL;
+
+const axiosInstance = axios.create({
+  baseURL: apiURL,
+  withCredentials: true // Set withCredentials to true for all requests
+});
+
+
 export const  otpRequest = (email)=> async(dispatch)=>{
     try{
     dispatch({
@@ -18,7 +26,7 @@ export const  otpRequest = (email)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-    const {data} = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/user/login',{email},config);
+    const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/login',{email},config);
     dispatch({
         type: OTP_SUCCESS,
         payload: data
@@ -42,7 +50,7 @@ export const  otpVerify = (otp,email)=> async(dispatch)=>{
         }
     }
     console.log(email+"x"+otp);
-    const {data} = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/user/verifyotp',{email,otp},config);
+    const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/verifyotp',{email,otp},config);
     dispatch({
         type: OTP_VERIFY_SUCCESS,
         payload: data

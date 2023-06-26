@@ -38,7 +38,7 @@ exports.loginAdmin = catchAsyncError(async (req, res, next)=>{
     {
     return next(new ErrorHandler('Invalid Email or Password',401));
     }
-
+    
     sendToken(admin, 200,res);
 
 });

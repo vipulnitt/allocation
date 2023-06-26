@@ -18,6 +18,7 @@ exports.modifyTime = catchAsyncError(async (req,res,next)=>{
 });
 
 exports.addNorms = catchAsyncError(async (req,res,next)=>{
+  console.log("acy"+req.body);
   const formDetails = await FormDetails.findByIdAndUpdate("admin",req.body,{
       new: true,
       runValidators:true,
@@ -41,7 +42,7 @@ exports.fetchNorms = catchAsyncError(async (req,res,next)=>{
 });
 
 exports.addQuarterDetails = catchAsyncError(async (req,res,next)=>{
-//  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.body));
   const quarterDetails = await QuarterDetails.findByIdAndUpdate("admin",req.body,{
       new: true,
       runValidators:true,
