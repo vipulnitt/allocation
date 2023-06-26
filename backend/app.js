@@ -11,13 +11,13 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://allocation-frontend.vercel.app',
     credentials: true, // Enable CORS credentials (cookies, authorization headers, etc.)
   }));
 
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', 'https://allocation-frontend.vercel.app');
     next();
   });
 
