@@ -31,7 +31,6 @@ const Home = () => {
       <br />
       
       <MetaData title={'NITT Website'} />
-      {process.env.REACT_APP_HELLO+"s"}
       <div style={{ display: 'flex' }}>
         <div style={{ flex: 1 }}>
           <LoginCorner style={{ height: '100%' }}/>
