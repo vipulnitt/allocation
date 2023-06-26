@@ -57,7 +57,7 @@ exports.otpVerify = catchAsyncError(async (req,res,next)=>{
     const {otp,email}= req.body;
     const user = await User.findOne({email});
     const status= await user.verifyOtp(otp);
-    
+    console.log("xx"+otp+" "+email);
     if(status)
     {
         user.Otp=undefined;

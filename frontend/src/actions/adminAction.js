@@ -42,7 +42,7 @@ export const  login = (email, password)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-    const {data} = await axios.post('/api/v1/login',{email,password},config);
+    const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/login`,{email,password},config);
     localStorage.setItem('token', data.token);
   //  console.log(JSON.stringify(data));
     dispatch({
@@ -67,7 +67,7 @@ export const  register = (userData)=> async(dispatch)=>{
             'content-type': 'multipart/form-data'
         }
     }
-    const {data} = await axios.post('/api/v1/register',userData,config);
+    const {data} = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/register',userData,config);
     localStorage.setItem('token', data.token);
    
     dispatch({
@@ -89,7 +89,7 @@ export const  loadUser = ()=> async(dispatch)=>{
         type: LOAD_USER_REQUEST
     })
    
-    const {data} = await axios.get('/api/v1/profile');
+    const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/profile');
     if(!data||!data.admin)
     {
         dispatch({
@@ -114,7 +114,7 @@ export const  loadUser = ()=> async(dispatch)=>{
 export const  logout = ()=> async(dispatch)=>{
     try{
    
-     await axios.get('/api/v1/logout');
+     await axios.get(process.env.REACT_APP_API_URL+'/api/v1/logout');
      localStorage.removeItem('token');
     dispatch({
         type: LOGOUT_USER_SUCCESS,
@@ -146,7 +146,7 @@ export const  updateProfile = (userData)=> async(dispatch)=>{
             'content-type': 'multipart/form-data'
         }
     }
-    const {data} = await axios.put('/api/v1/profile/update',userData,config);
+    const {data} = await axios.put(process.env.REACT_APP_API_URL+'/api/v1/profile/update',userData,config);
     dispatch({
         type:UPDATE_PROFILE_SUCCESS,
         payload: data.success
@@ -173,7 +173,7 @@ export const  updatePassword = (passwords)=> async(dispatch)=>{
             'content-type': 'application/form-data'
         }
     }
-    const {data} = await axios.put('/api/v1/password/update',passwords,config);
+    const {data} = await axios.put(process.env.REACT_APP_API_URL+'/api/v1/password/update',passwords,config);
     dispatch({
         type:UPDATE_PASSWORD_SUCCESS,
         payload: data.success
@@ -198,7 +198,7 @@ export const  forgotPassword = (email)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-    const {data} = await axios.post('/api/v1/password/forgot',email,config);
+    const {data} = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/password/forgot',email,config);
     dispatch({
         type:FORGOT_PASSWORD_SUCCESS,
         payload: data.message
@@ -223,7 +223,7 @@ export const  resetPassword = (token,passwords)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-    const {data} = await axios.put(`/api/v1/password/reset/${token}` ,passwords,config);
+    const {data} = await axios.put(process.env.REACT_APP_API_URL+`/api/v1/password/reset/${token}` ,passwords,config);
     dispatch({
         type:NEW_PASSWORD_SUCCESS,
         payload: data.success
@@ -249,8 +249,8 @@ export const addNotification = (formData)=> async(dispatch)=>{
                 'Content-Type': 'multipart/form-data'
               }
         }
-        const {result} = await axios.post(`/api/v1/addnotification` ,formData,config);
-        const {data} = await axios.get('/api/v1/getnotifications');
+        const {result} = await axios.post(process.env.REACT_APP_API_URL+`/api/v1/addnotification` ,formData,config);
+        const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/getnotifications');
         dispatch({
             type:GET_NOTIFICATION_SUCCESS,
             payload: data.notifications
@@ -271,7 +271,7 @@ export const fetchNotification = ()=> async(dispatch)=>{
         dispatch({
             type:GET_NOTIFICATION_REQUEST
         })
-        const {data} = await axios.get('/api/v1/getnotifications');
+        const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/getnotifications');
         dispatch({
             type: GET_NOTIFICATION_SUCCESS,
             payload: data.notifications
@@ -288,7 +288,7 @@ export const downloadPdf = (data) => async (dispatch) => {
     try {
       dispatch({ type: DOWNLOAD_REQUEST });
   
-      const response = await axios.post('/api/v1/downloadnotification', data, {
+      const response = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/downloadnotification', data, {
         responseType: 'blob', // Set the response type to 'blob'
       });
   
@@ -317,8 +317,8 @@ export const downloadPdf = (data) => async (dispatch) => {
         }
     }
   
-      const result = await axios.post('/api/v1/deletenotification', id,config);
-      const {data} = await axios.get('/api/v1/getnotifications');
+      const result = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/deletenotification', id,config);
+      const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/getnotifications');
   
       dispatch({
         type:GET_NOTIFICATION_SUCCESS,

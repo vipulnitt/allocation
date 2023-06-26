@@ -28,7 +28,7 @@ export const  fetchNorms = ()=> async(dispatch)=>{
         dispatch({
             type:NORM_REQUEST
         })
-        const {data} = await axios.get('/api/v1/fetchnorms');
+        const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/fetchnorms');
         dispatch({
             type: NORM_SUCCESS,
             payload: data.norms
@@ -52,7 +52,7 @@ export const  editNorms = (norms)=> async(dispatch)=>{
               }
         }
         console.log(JSON.stringify(norms));
-        const {data} = await axios.put('/api/v1/addnorms',norms,config);
+        const {data} = await axios.put(process.env.REACT_APP_API_URL+'/api/v1/addnorms',norms,config);
         dispatch({
             type: NORM_EDIT_SUCCESS,
             payload: data.norms
@@ -77,7 +77,7 @@ export const formSubmission = (data) => async(dispatch)=>{
               }
         }
     
-        const {res} = await axios.post('/api/v1/user/form',data,config);
+        const {res} = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/user/form',data,config);
         dispatch({
             type: SUBMISSION_SUCCESS,
             payload: res
@@ -97,7 +97,7 @@ export const exportData = () => async(dispatch)=>{
         })
 
     
-        const {data} = await axios.get('/api/v1/admin/formdata');
+        const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/admin/formdata');
        // console.log(data);
         dispatch({
             type: FORM_DATA_SUCCESS,
@@ -115,7 +115,7 @@ export const fetchQuarter = ()=> async(dispatch)=>{
         dispatch({
             type:QUARTER_REQUEST
         })
-        const {data} = await axios.get('/api/v1/fetchquarterDetails');
+        const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/fetchquarterDetails');
         dispatch({
             type: QUARTER_SUCCESS,
             payload: data.quarters
@@ -139,7 +139,7 @@ export const  editQuarter = (quarter)=> async(dispatch)=>{
               }
         };
         console.log(JSON.stringify(quarter));
-        const {data} = await axios.put('/api/v1/addquarterDetails',quarter,config);
+        const {data} = await axios.put(process.env.REACT_APP_API_URL+'/api/v1/addquarterDetails',quarter,config);
         dispatch({
             type: QUARTER_EDIT_SUCCESS,
             payload: data.quaeterDetails
@@ -164,7 +164,7 @@ export const quarterFormSubmission = (data) => async(dispatch)=>{
               }
         }
     
-        const {res} = await axios.post('/api/v1/user/quarterform',data,config);
+        const {res} = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/user/quarterform',data,config);
         dispatch({
             type: SUBMISSION_SUCCESS,
             payload: res
@@ -184,7 +184,7 @@ export const exportQuarterData = () => async(dispatch)=>{
         })
 
     
-        const {data} = await axios.get('/api/v1/admin/quarterformdata');
+        const {data} = await axios.get(process.env.REACT_APP_API_URL+'/api/v1/admin/quarterformdata');
        // console.log(data);
         dispatch({
             type: FORM_DATA_SUCCESS,
@@ -207,7 +207,7 @@ export const modifyTime = (time) => async (dispatch) => {
         }
     }
   
-      const data = await axios.post('/api/v1/form/modifytime', time,config);
+      const data = await axios.post(process.env.REACT_APP_API_URL+'/api/v1/form/modifytime', time,config);
     
   
       dispatch({
