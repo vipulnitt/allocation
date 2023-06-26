@@ -10,16 +10,6 @@ module.exports =(err,req,res,next)=>{
             
         });
     
-        res.status(err.statusCode).json({
-            success:false,
-            message: err.message|| 'Internal Server Error'
-        });
-        if(err.code === 11000)
-        {
-            const message = `Duplicate ${Object.keyValue}  entered`;
-            error = new ErrorHandler(message, 400);
-        }
-    
 
    
 }

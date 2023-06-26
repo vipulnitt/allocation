@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middleware/errors');
 var bodyParser = require('body-parser')
+var cors = require('cors')
 
 app.use(cookieParser());
 app.use(express.json());
