@@ -7,7 +7,7 @@ var bodyParser = require('body-parser')
 var cors = require('cors')
 
 const corsOptions ={
-    origin:'https://allocation-frontend.vercel.app', 
+    origin:process.env.ORIGIN_URL, 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
