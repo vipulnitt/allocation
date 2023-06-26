@@ -17,6 +17,8 @@ app.use('/api/v1',admin);
 app.use('/api/v1',user);
 app.use('/api/v1',form);
 app.use('/api/v1',formDetails);
+app.use(cors({ origin: "*", credentials: true }));
+
 
 //middleware to handle errors
 app.use(errorMiddleware);
