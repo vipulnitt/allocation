@@ -90,10 +90,20 @@ export const  loadUser = ()=> async(dispatch)=>{
     })
    
     const {data} = await axios.get('/api/v1/profile');
-    dispatch({
-        type: LOAD_USER_SUCCESS,
-        payload: data.admin
-    })
+    if(!data||!data.admin)
+    {
+        dispatch({
+            type:LOAD_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }else
+    {
+        dispatch({
+            type: LOAD_USER_SUCCESS,
+            payload: data.admin
+        })
+    }
+   
 
     } catch(error){
         dispatch({
