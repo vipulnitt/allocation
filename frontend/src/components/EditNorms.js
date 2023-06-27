@@ -10,7 +10,7 @@ const EditNorms = () => {
   const [normsArray, setNorms] = useState([]);
   const [newNorm, setNewNorm] = useState('');
   const dispatch = useDispatch();
-  const { norms, loading, data } = useSelector(state => state.form);
+  const { norms, loading} = useSelector(state => state.form);
 
   useEffect(() => {
     dispatch(fetchNorms());
@@ -52,7 +52,7 @@ const EditNorms = () => {
   const handleExport = () => {
     dispatch(exportData());
   };
-
+ const {data}= useSelector(state=>state.res);
   useEffect(() => {
     if (data) {
       customFunction(data.form);
