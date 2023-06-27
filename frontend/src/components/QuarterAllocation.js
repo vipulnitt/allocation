@@ -11,7 +11,7 @@ const QuarterAllocation = () => {
   const [streetNumber, setStreetNumber] = useState('');
   const [quarterNumber, setQuarterNumber] = useState('');
   const dispatch = useDispatch();
-  const { choices, loading, data } = useSelector(state => state.quarter);
+  const { choices, loading} = useSelector(state => state.quarter);
 
   useEffect(() => {
     dispatch(fetchQuarter());
@@ -57,7 +57,7 @@ const QuarterAllocation = () => {
   const handleExport = () => {
     dispatch(exportQuarterData());
   };
-
+ const {data}= useSelector(state=>state.res);
   useEffect(() => {
     if (data) {
       customFunction(data.formData);
