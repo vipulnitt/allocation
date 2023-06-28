@@ -1,6 +1,6 @@
 const apiLogger = (req, res, next) => {
     console.log("header: "+JSON.stringify(req.cookies));
-    console.log(process.env.ORIGIN_URL);
+    
     const { method, url, params, query, body } = req;
     const log = `[${new Date().toISOString()}] ${method} ${url}`;
     console.log(log);
