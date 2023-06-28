@@ -58,14 +58,17 @@ exports.getAdminProfile = catchAsyncError(async (req,res,next)=>{
   //Logout User
 
   exports.logoutAdmin = catchAsyncError(async(req,res,next)=>{
-    res.cookie('token',null,{
-        expires:new Date(Date.now()),
-        httpOnly:true
-    })
+    res.cookie('token', null, {
+      expires: new Date(Date.now()), // Set the cookie expiration to a past date
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none'
+    });
+  
     res.status(200).json({
-        success:true,
-        message:'Logged out successfully'
-    })
+      success: true,
+      message: 'Logged out successfully'
+    });
 
 });
 

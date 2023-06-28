@@ -109,6 +109,8 @@ export const logout = () => async (dispatch) => {
   try {
     await axiosInstance.get('/api/v1/logout');
     localStorage.removeItem('token');
+    // Remove the token from the cookies on the frontend
+    axiosInstance.defaults.headers.common['Authorization'] = '';
     dispatch({
       type: LOGOUT_USER_SUCCESS
     });
