@@ -17,6 +17,7 @@ import EditNorms from "./components/EditNorms";
 import QuartersForm from "./components/QuartersForm";
 import QuarterAllocation from "./components/QuarterAllocation";
 import AdminNotification from "./components/Layout/AdminNotification";
+import Quarter from "./components/Student/quarter";
 const App = () => {
   const {isAuthenticated,loading,user} = useSelector(state=> state.auth);
   const {isUserAuthenticated} = useSelector(state=>state.userAuth);
@@ -49,8 +50,8 @@ const App = () => {
       <Route path='/' Component={Home}/>
       <Route path='/admin/login' Component={Login}/>
       <Route path='/staff/quarterallocation' Component={QuartersForm} formType='2'/>
-      <Route path='/student' Component={Student} formType='1'/>
-      <Route path='/staff' Component={Student} formType='2'/>
+      <Route path='/student' Component={Student} />
+      <Route path='/staff' Component={Quarter}/>
       <Route path='/admin' element={
       <ProtectedRoute isLoggedIn={isAuthenticated}>
         <Admin/>

@@ -5,7 +5,7 @@ import { otpRequest, otpVerify } from '../../actions/userAction';
 import { clearErrors } from '../../actions/adminAction';
 import Swal from 'sweetalert2';
 
-const Student = (formType) => {
+const Quarter = () => {
     const navigate = useNavigate();
     const [otp,setOtp]= useState('');
     const [emailToSend,setEmail] = useState('');
@@ -43,10 +43,9 @@ const Student = (formType) => {
       const {isUserAuthenticated,error} = useSelector(state=>state.userAuth);
       useEffect(()=>{
         if(isUserAuthenticated) {
-          
-          navigate('/student/form');
-         
+          navigate('/staff/quarterallocation');
         }
+        
         if(error){
           
           Swal.fire({
@@ -106,4 +105,4 @@ const Student = (formType) => {
  </>
  );
 };
-export default Student;
+export default Quarter;
