@@ -5,7 +5,7 @@ const UserController = require("../models/user");
 const ErrorHandler = require("../utils/errorHandler");
 // Checks if user is authenticated or not.
 exports.isAuthenticated = catchAsyncError(async (req,res,next)=>{
-    const token = req.cookies.token;
+    const token = req.cookies.tkn;
     console.log(req.cookies);
      
     if(!token){

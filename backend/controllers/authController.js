@@ -56,9 +56,11 @@ exports.getAdminProfile = catchAsyncError(async (req,res,next)=>{
   });
 
   //Logout User
-
+  //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTc0NzEyNTRhYzMwNTgxMTRhYzI1NCIsImlhdCI6MTY4NzkyMzM3NiwiZXhwIjoxNjg4NTI4MTc2fQ.3wjmdKwLVpAjeCy0NyTMiirGPeoelUy0nyRhVy4ApGM
   exports.logoutAdmin = catchAsyncError(async(req,res,next)=>{
-    res.cookie('token', null, {
+
+    console.log("header: "+JSON.stringify(req.cookies));
+    res.cookie('tkn', null, {
       expires: new Date(Date.now()), // Set the cookie expiration to a past date
       httpOnly: true,
       secure: true,

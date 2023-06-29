@@ -11,7 +11,7 @@ const sendToken = (admin, statusCode, res) => {
   
     // Send token and save in the cookies
     res.status(statusCode)
-      .cookie('token', token, options)
+      .cookie('tkn', token, options)
       .json({
         success: true,
         token,

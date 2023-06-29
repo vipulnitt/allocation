@@ -107,10 +107,11 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
+    dispatch({
+      type: LOGOUT_USER_SUCCESS
+    });
     await axiosInstance.get('/api/v1/logout');
     localStorage.removeItem('token');
-    // Remove the token from the cookies on the frontend
-    axiosInstance.defaults.headers.common['Authorization'] = '';
     dispatch({
       type: LOGOUT_USER_SUCCESS
     });
@@ -281,11 +282,10 @@ export const downloadPdf = (data) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DOWNLOAD_FAIL,
-      payload: error.response ? error.response.data.message : error.message
+      payload: error.response.data.message
     });
   }
 };
-
 export const deleteNotification = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_NOTIFICATION_REQUEST });
@@ -295,12 +295,12 @@ export const deleteNotification = (id) => async (dispatch) => {
       }
     };
 
-    const result = await axiosInstance.post('/api/v1/deletenotification', id, config);
+    await axiosInstance.delete(`/api/v1/deletenotification/${id}`, config);
     const { data } = await axiosInstance.get('/api/v1/getnotifications');
 
     dispatch({
       type: GET_NOTIFICATION_SUCCESS,
-      payload: data
+      payload: data.notifications
     });
   } catch (error) {
     dispatch({
