@@ -8,8 +8,8 @@ const upload = require('../middleware/upload');
 
 router.route('/register').post(registerAdmin);
 router.route('/login').post(loginAdmin);
-router.route('/profile').get(isAuthenticated,getAdminProfile);
-router.route('/logout').get(isAuthenticated,logoutAdmin);
+router.route('/profile').post(isAuthenticated,getAdminProfile);
+router.route('/logout').post(isAuthenticated,logoutAdmin);
 router.route('/password/update').put(isAuthenticated,updatePassword);
 router.route('/addnotification').post(isAuthenticated,upload.single('file'),addNotification);
 router.route('/getnotifications').get(getNotification);
