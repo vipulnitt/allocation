@@ -28,7 +28,7 @@ const form = require('./routes/form');
 const formDetails = require('./routes/formDetails');
 const apiLogger = require('./middleware/apiLogger');
 
-app.use(apiLogger);
+//app.use(apiLogger);
 app.use('/api/v1', admin);
 app.use('/api/v1', user);
 app.use('/api/v1', form);
