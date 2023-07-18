@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchNorms, formSubmission } from '../../actions/formAction';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { logoutUser } from '../../actions/userAction';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const Form = () => {
       showConfirmButton: false,
       timer: 1500,
     });
+    dispatch(logoutUser());
     navigate('/');
   };
 
@@ -53,6 +55,7 @@ const Form = () => {
     });
   };
   const handleCancel= (e) => {
+    dispatch(logoutUser());
     navigate('/');
   };
   return (

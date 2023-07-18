@@ -41,7 +41,21 @@ const Login =()  => {
 },[dispatch,isAuthenticated,error]);
  const submitHandler = (e) =>{
         e.preventDefault();
-        dispatch(login(email,password));
+        const emailPattern = /@nitt\.edu$/;
+        if(emailPattern.test(email))
+        {
+          dispatch(login(email,password));
+        }else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'OOPS!',
+            text: "Invalid Email!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        
     }
   return (
     <Fragment>

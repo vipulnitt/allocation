@@ -31,7 +31,7 @@ export const fetchNorms = () => async (dispatch) => {
     });
     dispatch({
       type: NORM_SUCCESS,
-      payload: data.norms
+      payload: data
     });
   } catch (error) {
     dispatch({
@@ -115,7 +115,7 @@ export const fetchQuarter = () => async (dispatch) => {
     });
     dispatch({
       type: QUARTER_SUCCESS,
-      payload: data.quarters
+      payload: data
     });
   } catch (error) {
     dispatch({
@@ -199,7 +199,7 @@ export const modifyTime = (time) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const data = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/form/modifytime', time, {
+    const data = await axios.put(process.env.REACT_APP_API_URL + '/api/v1/form/modifytime', time, {
       withCredentials: true, // Include cookies in the request
       ...config
     });
@@ -214,3 +214,28 @@ export const modifyTime = (time) => async (dispatch) => {
     });
   }
 };
+
+export const modifyTime2 = (time) => async (dispatch) => {
+  try {
+    dispatch({ type: TIME_EDIT_REQUEST });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const data = await axios.put(process.env.REACT_APP_API_URL + '/api/v1/form/modifytime2', time, {
+      withCredentials: true, // Include cookies in the request
+      ...config
+    });
+    dispatch({
+      type: TIME_EDIT_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: TIME_EDIT_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+

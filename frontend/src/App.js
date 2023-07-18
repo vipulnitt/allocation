@@ -18,6 +18,9 @@ import QuartersForm from "./components/QuartersForm";
 import QuarterAllocation from "./components/QuarterAllocation";
 import AdminNotification from "./components/Layout/AdminNotification";
 import Quarter from "./components/Student/quarter";
+import ProtectedRouteUser from "./routes/ProtectedRoute";
+import Adminprofile from "./components/Adminprofile";
+import UpdatePassword from "./components/UpdatePassword";
 const App = () => {
   const {isAuthenticated,loading,user} = useSelector(state=> state.auth);
   const {isUserAuthenticated} = useSelector(state=>state.userAuth);
@@ -49,7 +52,11 @@ const App = () => {
     <Routes>
       <Route path='/' Component={Home}/>
       <Route path='/admin/login' Component={Login}/>
-      <Route path='/staff/quarterallocation' Component={QuartersForm} formType='2'/>
+      <Route path='/staff/quarterallocation' element={
+        <ProtectedRouteUser isLoggedIn={isUserAuthenticated}>
+          <QuartersForm/>
+        </ProtectedRouteUser>
+      } Component={QuartersForm}/>
       <Route path='/student' Component={Student} />
       <Route path='/staff' Component={Quarter}/>
       <Route path='/admin' element={
@@ -57,11 +64,20 @@ const App = () => {
         <Admin/>
       </ProtectedRoute>
     } exact/>
-
-     <Route path='/student/form' element={
-      <ProtectedRoute isLoggedIn={isUserAuthenticated}>
-        <Form/>
+     <Route path='/profile' element={
+      <ProtectedRoute isLoggedIn={isAuthenticated}>
+       <Adminprofile/>
       </ProtectedRoute>
+    } exact/>
+     <Route path='/admin/updatepassword' element={
+      <ProtectedRoute isLoggedIn={isAuthenticated}>
+        <UpdatePassword/>
+      </ProtectedRoute>
+    } exact/>
+     <Route path='/student/form' element={
+      <ProtectedRouteUser isLoggedIn={isUserAuthenticated}>
+      <Form/>
+    </ProtectedRouteUser>
     } exact/>
      <Route path='/admin/editnorms' element={
       <ProtectedRoute isLoggedIn={isAuthenticated}>
@@ -82,7 +98,7 @@ const App = () => {
     </Router>
 
  
- <Footer/>
+
  </div>
  );
 };

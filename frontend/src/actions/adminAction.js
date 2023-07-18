@@ -158,9 +158,10 @@ export const updatePassword = (passwords) => async (dispatch) => {
     });
     const config = {
       headers: {
-        'Content-Type': 'application/form-data'
+        'Content-Type': 'application/json'
       }
     };
+    console.log(JSON.stringify(passwords));
     const { data } = await axiosInstance.put('/api/v1/password/update', passwords, config);
     dispatch({
       type: UPDATE_PASSWORD_SUCCESS,

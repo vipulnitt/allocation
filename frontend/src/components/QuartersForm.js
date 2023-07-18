@@ -3,6 +3,7 @@ import { fetchQuarter, quarterFormSubmission } from '../actions/formAction';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../actions/userAction';
 const QuartersForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const QuartersForm = () => {
       showConfirmButton: false,
       timer: 1500,
     });
+    dispatch(logoutUser());
     navigate('/');
   };
 
@@ -80,6 +82,8 @@ const QuartersForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleCancel= (e) => {
+    dispatch(logoutUser());
+    
     navigate('/');
   };
 

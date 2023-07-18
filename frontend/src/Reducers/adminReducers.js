@@ -92,14 +92,17 @@ export const adminReducer =(state={},action)=>{
        case UPDATE_PASSWORD_REQUEST:
        return{
             ...state,
-            loading:true
+            loading:true,
+            error:null,
+            isUpdated:null,
        }
        case UPDATE_PROFILE_SUCCESS:
        case UPDATE_PASSWORD_SUCCESS:
         return {
             ...state,
             loading:false,
-            isUpdated:action.payload
+            isUpdated:action.payload,
+            error:null
         }
         case UPDATE_PROFILE_RESET:
         case UPDATE_PASSWORD_RESET:

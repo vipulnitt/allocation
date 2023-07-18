@@ -17,6 +17,7 @@ exports.modifyTime = catchAsyncError(async (req,res,next)=>{
 
 });
 
+
 exports.addNorms = catchAsyncError(async (req,res,next)=>{
   console.log("acy"+req.body);
   const formDetails = await FormDetails.findByIdAndUpdate("admin",req.body,{
@@ -37,9 +38,26 @@ exports.fetchNorms = catchAsyncError(async (req,res,next)=>{
   const formDetails = await FormDetails.findById("admin");
     res.status(200).json({
       success: true,
-      norms: formDetails.norms
+      norms: formDetails.norms,
+      startTime:formDetails.startTime,
+      endTime:formDetails.endTime
     });
 });
+
+exports.modifyTime2 = catchAsyncError(async (req,res,next)=>{
+  const formDetails= await QuarterDetails.findByIdAndUpdate("admin",req.body,{
+    new: true,
+    runValidators:true,
+    useFindAndModify: false 
+  });
+
+  res.status(200).json({
+    success: true,
+    startTime: formDetails.startTime,
+    endTime: formDetails.endTime
+  });
+});
+
 
 exports.addQuarterDetails = catchAsyncError(async (req,res,next)=>{
   console.log(JSON.stringify(req.body));
@@ -62,6 +80,9 @@ exports.fetchQuarter = catchAsyncError(async (req,res,next)=>{
   const quarterDetails = await QuarterDetails.findById("admin");
     res.status(200).json({
       success: true,
-      quarters: quarterDetails.quarters
+      quarters: quarterDetails.quarters,
+      startTime:quarterDetails.startTime,
+      endTime:quarterDetails.endTime
     });
 });
+

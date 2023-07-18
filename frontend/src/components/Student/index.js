@@ -15,14 +15,28 @@ const Student = (formType) => {
       e.preventDefault();
       if(emailToSend)
       {
-        dispatch(otpRequest(emailToSend));
-        Swal.fire({
-          icon: 'success',
-          title: 'OTP Sent Successfully',
-          text: "",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+  
+        const emailPattern = /@nitt\.edu$/;
+        if(emailPattern.test(emailToSend))
+        {
+          dispatch(otpRequest(emailToSend));
+          Swal.fire({
+            icon: 'success',
+            title: 'OTP Sent Successfully',
+            text: "",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'OOPS!',
+            text: "Invalid Email!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }else
       {
         Swal.fire({

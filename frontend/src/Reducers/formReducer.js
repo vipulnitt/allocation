@@ -16,7 +16,10 @@ import {
     QUARTER_EDIT_FAIL,
     QUARTER_REQUEST,
     QUARTER_SUCCESS,
-    QUARTER_FAIL
+    QUARTER_FAIL,
+    TIME_EDIT_REQUEST,
+    TIME_EDIT_SUCCESS,
+    TIME_EDIT_FAIL  
 } from '../constants/formConstant';
 
 export const normFetch = (state ={formDetails:{}},action)=>{
@@ -29,7 +32,9 @@ export const normFetch = (state ={formDetails:{}},action)=>{
             return {
                 ...state,
                 loading:false,
-                norms: action.payload   
+                norms: action.payload.norms,
+                sTime:action.payload.startTime,
+                eTime:action.payload.endTime   
             }
        
         case NORM_FAIL:
@@ -42,6 +47,29 @@ export const normFetch = (state ={formDetails:{}},action)=>{
             return state;
     }
 
+}
+export const dateAndTime = (state ={formDetails:{}},action)=>{
+    switch(action.type){
+        case TIME_EDIT_REQUEST:
+            return{
+                loading:true,
+            }
+        case TIME_EDIT_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                time: action.payload   
+            }
+       
+        case TIME_EDIT_FAIL:
+                return{
+                    loading:false,
+                    time: null,
+                    error: action.payload
+                }
+         default:
+            return state;
+    }
 }
 export const normEdit = (state ={formDetails:{}},action)=>{
     switch(action.type){
@@ -128,7 +156,9 @@ export const quarterFetch = (state ={quarterDetails:{}},action)=>{
             return {
                 ...state,
                 loading:false,
-                choices: action.payload   
+                choices: action.payload.quarters,
+                sTime:action.payload.startTime,
+                eTime:action.payload.endTime   
             }
        
         case QUARTER_FAIL:

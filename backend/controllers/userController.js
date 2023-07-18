@@ -43,15 +43,17 @@ exports.login = catchAsyncError(async (req, res,next) => {
 });
 
 exports.logoutUser = catchAsyncError(async(req,res,next)=>{
-    res.cookie('tokenUser',null,{
-        expires:new Date(Date.now()),
-        httpOnly:true
-    })
-    res.status(200).json({
-        success:true,
-        message:'Logged out successfully'
-    })
-
+    res.cookie('tokenUser', null, {
+        expires: new Date(Date.now()), // Set the cookie expiration to a past date
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none'
+      });
+    
+      res.status(200).json({
+        success: true,
+        message: 'Logged out successfully'
+      });
 });
 exports.otpVerify = catchAsyncError(async (req,res,next)=>{
     const {otp,email}= req.body;

@@ -79,8 +79,10 @@ exports.getAdminProfile = catchAsyncError(async (req,res,next)=>{
 // Change Password
 
 exports.updatePassword = catchAsyncError(async(req,res,next)=>{
-    const admin = await Admin.findById(req.admin.id).select('+password');
 
+    console.log(JSON.stringify(req.body));
+    const admin = await Admin.findById(req.admin.id).select('+password');
+       
     
     const isMatched = await admin.comparePassword(req.body.oldPassword);
     

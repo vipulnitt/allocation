@@ -24,17 +24,25 @@ const Header = () => {
   return (
     <Fragment>
         
-    <nav className="navbar row" style={{ backgroundColor: 'blue' }}>
-      <div className="col-12 col-md-5 d-flex ">
-        <div className="navbar-brand">
-          <img className="w-50 h-70" src="/images/logo.png" />
-        </div>
-        <div className="mx-auto mt-4" style={{ width: 200 }}>
-  <h1 className='font-weight-bold text-light' style={{ whiteSpace: 'nowrap' }}>National Institute of Technology, Trichy</h1>
-</div>
-      </div>
+        <nav className="navbar row navbar-expand-lg h-auto " style={{
+    backgroundColor: 'blue'}}>
+  
+        <div
+  className="container-fluid p-0"
+  style={{
+    backgroundImage: `url(/images/nitt.png)`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'left',
+    backgroundColor: 'blue',
+    minHeight: '100px', // Set a minimum height for the header
+    height: 'auto', // Adjust the height value as per your requirement
+  }}
+/>
+
+
     
-      <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
+<div className="ml-auto mr-4 mt-4 mt-md-0 text-center">
       {admin? (
                       <div className="dropdown">
                         <Link to="/admin" className='dropbtn' 

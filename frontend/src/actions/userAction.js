@@ -7,6 +7,7 @@ import {
     OTP_VERIFY_SUCCESS,
     OTP_VERIFY_FAIL
 } from '../constants/userConstant';
+import { LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../constants/adminConstant";
 
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -62,4 +63,25 @@ export const  otpVerify = (otp,email)=> async(dispatch)=>{
             payload: error.response.data.message
         })
     }
+}
+//
+
+export const  logoutUser = ()=> async(dispatch)=>{
+    try{
+    dispatch({
+        type: LOGOUT_USER_REQUEST
+    })
+
+
+    const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/logout');
+    dispatch({
+        type: LOGOUT_USER_SUCCESS
+      });
+    } catch (error) {
+      dispatch({
+        type: LOGOUT_USER_FAIL,
+        payload: error.response.data.message
+      });
+    }
+    
 }

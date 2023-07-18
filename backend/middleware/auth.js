@@ -18,7 +18,7 @@ exports.isAuthenticated = catchAsyncError(async (req,res,next)=>{
 })
 exports.isAuthenticatedUser = catchAsyncError(async (req,res,next)=>{
     const  tokenUser = req.cookies.tokenUser;
-
+    console.log(JSON.stringify(req.cookies))
     console.log(tokenUser)
     if(!tokenUser){
         return next(new ErrorHandler('Login first to access this resource.'));
