@@ -20,7 +20,11 @@ import {
   QUARTER_FAIL,
   TIME_EDIT_REQUEST,
   TIME_EDIT_SUCCESS,
-  TIME_EDIT_FAIL
+  TIME_EDIT_FAIL,
+  GET_COUNT_REQUEST,
+  GET_COUNT_SUCCESS,
+  GET_COUNT_FAIL,
+  CLEAR_ERRORS
 } from '../constants/formConstant';
 
 export const fetchNorms = () => async (dispatch) => {
@@ -73,7 +77,7 @@ export const formSubmission = (data) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const { res } = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/user/form', data, {
+    const res = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/user/form', data, {
       withCredentials: true, // Include cookies in the request
       ...config
     });
@@ -157,7 +161,7 @@ export const quarterFormSubmission = (data) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const { res } = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/user/quarterform', data, {
+    const res = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/user/quarterform', data, {
       withCredentials: true, // Include cookies in the request
       ...config
     });
@@ -239,3 +243,87 @@ export const modifyTime2 = (time) => async (dispatch) => {
   }
 };
 
+export const count1 = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_COUNT_REQUEST });
+    
+    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/submissioncount', {
+      withCredentials: true
+    });
+ //.   console.log(JSON.stringify(data));
+    dispatch({
+      type: GET_COUNT_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_COUNT_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
+export const count2 = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_COUNT_REQUEST });
+
+    
+    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/quartersubmissioncount', {
+      withCredentials: true
+    });
+    dispatch({
+      type: GET_COUNT_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_COUNT_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
+export const deleteAll1 = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_COUNT_REQUEST });
+    
+    
+    await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall1', {
+      withCredentials: true
+    });
+    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/submissioncount', {
+      withCredentials: true
+    });
+    dispatch({
+      type: GET_COUNT_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_COUNT_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+export const deleteAll2 = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_COUNT_REQUEST });
+    
+    
+    await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall2', {
+      withCredentials: true
+    });
+    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/quartersubmissioncount', {
+      withCredentials: true
+    });
+    dispatch({
+      type: GET_COUNT_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_COUNT_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};

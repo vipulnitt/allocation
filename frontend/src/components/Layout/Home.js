@@ -31,22 +31,27 @@ const Home = () => {
       <br />
       
       <MetaData title={'NITT Website'} />
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: 1 }}>
-          <LoginCorner style={{ height: '100%' }}/>
+      <div>
+      <div className="ml-4"style={{ flex: 1 }}>
+        <div >
+          <h2>Forms</h2>
+          <ul>
+         <li><Link to="/student">APPLICATION FOR ALLOTMENT OF PG / QIP/ RSB QUARTERS</Link></li> 
+      
+        <li><Link to="/staff">APPLICATION FOR ALLOTMENT / RENEWAL / CHANGE OF RESIDENTIAL QUARTERS</Link></li>
+          </ul>
+       
+      </div>
         </div>
-        <div style={{ flex: 2, marginLeft: '10px', marginRight: '10px' }}>
+        <div style={{ flex: 2,marginTop:"2%", marginLeft: '1%', marginRight: '4%' }}>
           <NoticeBoard />
         </div>
+       
       </div>
-
+    
 
       <br />
-      <div>
-        <Link to="/student">APPLICATION FOR ALLOTMENT OF PG / QIP/ RSB QUARTERS</Link>
-        <br />
-        <Link to="/staff">APPLICATION FOR ALLOTMENT / RENEWAL / CHANGE OF RESIDENTIAL QUARTERS</Link>
-      </div>
+     
       <hr />
     </Fragment>
   );

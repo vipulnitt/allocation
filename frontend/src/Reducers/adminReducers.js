@@ -59,8 +59,7 @@ export const authReducer = (state ={admin:{}},action)=>{
                 return{
                     loading:false,
                     isAuthenticated:false,
-                    admin:null,
-                    error: action.payload
+                    admin:null
                 }
         case REG_FAIL:
         case LOGIN_FAIL:

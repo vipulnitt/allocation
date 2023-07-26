@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {adminReducer, authReducer, notificationFetch} from './Reducers/adminReducers';
 import { userAuth, userOtpSent } from './Reducers/userReducer';
-import { normFetch,  getFormData, quarterFetch,dateAndTime} from './Reducers/formReducer';
+import { normFetch,  getFormData, quarterFetch,dateAndTime, countData, formSubmission} from './Reducers/formReducer';
+
 
 const reducer = combineReducers({
   auth: authReducer,
@@ -14,7 +15,9 @@ const reducer = combineReducers({
   res: getFormData,
   quarter:quarterFetch,
   Notifications: notificationFetch,
-  dateAndTime:dateAndTime
+  dateAndTime:dateAndTime,
+  countData:countData,
+  formSubmission: formSubmission
 })
 
 let initialState = {

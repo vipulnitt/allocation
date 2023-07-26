@@ -26,7 +26,7 @@ const admin = require('./routes/admin');
 const user = require('./routes/user');
 const form = require('./routes/form');
 const formDetails = require('./routes/formDetails');
-const apiLogger = require('./middleware/apiLogger');
+
 
 //app.use(apiLogger);
 app.use('/api/v1', admin);

@@ -7,6 +7,7 @@ import {
     OTP_VERIFY_SUCCESS,
     OTP_VERIFY_FAIL
 } from '../constants/userConstant';
+import { CLEAR_ERRORS } from "../constants/formConstant";
 import { LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../constants/adminConstant";
 
 const apiURL = process.env.REACT_APP_API_URL;
@@ -85,3 +86,10 @@ export const  logoutUser = ()=> async(dispatch)=>{
     }
     
 }
+
+export const clearErrors = () => async (dispatch) => {
+    dispatch({
+      type: CLEAR_ERRORS
+    });
+  };
+  

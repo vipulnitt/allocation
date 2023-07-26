@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editNorms, exportData, fetchNorms,modifyTime  } from "../actions/formAction";
+import { count1, deleteAll1, editNorms, exportData, fetchNorms,modifyTime  } from "../actions/formAction";
 import Swal from "sweetalert2";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
@@ -9,14 +9,16 @@ import Loader from "../Loader";
 const EditNorms = () => {
   const [normsArray, setNorms] = useState([]);
   const [newNorm, setNewNorm] = useState("");
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState();
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const dispatch = useDispatch();
   const { norms, loading,sTime,eTime } = useSelector((state) => state.form);
   const { data } = useSelector((state) => state.res);
+  const {count} = useSelector(state=>state.countData);
 
   useEffect(() => {
     dispatch(fetchNorms());
+    dispatch(count1());
   }, [dispatch]);
 
   useEffect(() => {
@@ -36,10 +38,11 @@ const EditNorms = () => {
 
   const handleSaveTime = () => {
     const jsonData = {
-      startTime: startTime,
-      endTime: endTime,
+      startTime: new Date(startTime),
+      endTime: new Date(endTime),
     };
-  
+
+   
     dispatch(modifyTime(jsonData));
     Swal.fire({
       icon: "success",
@@ -104,19 +107,50 @@ const EditNorms = () => {
     FileSaver.saveAs(fileData, "exported_data.xlsx");
   };
 
+  const handleDeleteAll=()=>{
+    Swal.fire({
+      title: 'Are you sure to delete all submissions?',
+      text: 'This action cannot be undone!',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        confirmButton: 'order-2 mr-4',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAll1());
+        Swal.fire('deleted!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('not deleted', '', 'info')
+      }
+    })
+  }
+
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
-        <div>
-          <div>
-            <br />
-            <button id="ExportData" className="ml-2" onClick={handleExport}>
-              Export Data
-            </button>
+        <div className="mb-5 ml-3" >
+        <div  style={{ display: "flex", marginTop: "1%" }} >
+          <br />
+          <div className="mt-3">
+            <b>Number of Submissions: {count&count}</b>
           </div>
-
+       
+          <button id="ExportData" className="ml-5"  onClick={handleExport}>
+            Export Data
+          </button>
+          <button id="DeleteData" className="ml-5 btn btn-danger "  onClick={handleDeleteAll}>
+           Delete All Submissions
+          </button>
+        
+         
+        </div>
           <div style={{ display: "flex", marginTop: "1%" }}>
             Start at:
             <input

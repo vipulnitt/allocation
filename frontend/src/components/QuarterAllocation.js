@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import {
+  count2,
+  deleteAll2,
   editQuarter,
   exportQuarterData,
   fetchQuarter,
@@ -15,16 +17,19 @@ const QuarterAllocation = () => {
   const [choiceArray, setChoice] = useState([]);
   const [streetNumber, setStreetNumber] = useState("");
   const [quarterNumber, setQuarterNumber] = useState("");
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState();
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const dispatch = useDispatch();
   const { choices, loading,sTime,eTime  } = useSelector((state) => state.quarter);
-  const { data } = useSelector((state) => state.res);
+  const {count} = useSelector(state=>state.countData);
+  
 
   useEffect(() => {
     dispatch(fetchQuarter());
+    dispatch(count2());
   }, [dispatch]);
+  const { data } = useSelector((state) => state.res);
 
   useEffect(() => {
     if(eTime)
@@ -41,8 +46,8 @@ const QuarterAllocation = () => {
 
   const handleSaveTime = () => {
     const jsonData = {
-      startTime: startTime,
-      endTime: endTime,
+      startTime: new Date(startTime),
+      endTime: new Date(endTime)
     };
   
     dispatch(modifyTime2(jsonData));
@@ -112,20 +117,52 @@ const QuarterAllocation = () => {
     FileSaver.saveAs(fileData, "exported_data.xlsx");
   };
 
+  const handleDeleteAll=()=>{
+    Swal.fire({
+      title: 'Are you sure to delete all submissions?',
+      text: 'This action cannot be undone!',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: 'No',
+      customClass: {
+        actions: 'my-actions',
+        confirmButton: 'order-2 mr-4',
+        denyButton: 'order-3',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAll2());
+        Swal.fire('deleted!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('not deleted', '', 'info')
+      }
+    })
+  }
+
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <div>
+        <div className="mb-5 ml-3" >
+          <div  style={{ display: "flex", marginTop: "1%" }} >
             <br />
-            <button id="ExportData" className="ml-2" onClick={handleExport}>
+            <div className="mt-3">
+              <b>Number of Submissions: {count&count}</b>
+            </div>
+         
+            <button id="ExportData" className="ml-5"  onClick={handleExport}>
               Export Data
             </button>
+            <button id="DeleteData" className="ml-5 btn btn-danger "  onClick={handleDeleteAll}>
+           Delete All Submissions
+          </button>
+          
+           
           </div>
 
-          <div style={{ display: "flex", marginTop: "1%" }}>
+          <div style={{ display: "flex", marginTop: "1%" }} >
             Start at:
             <input
               style={{ flex: 2, marginLeft: "2%", marginRight: "2%" }}
@@ -189,7 +226,7 @@ const QuarterAllocation = () => {
               Save
             </button>
           </div>
-        </>
+        </div>
       )}
     </Fragment>
   );

@@ -19,7 +19,11 @@ import {
     QUARTER_FAIL,
     TIME_EDIT_REQUEST,
     TIME_EDIT_SUCCESS,
-    TIME_EDIT_FAIL  
+    TIME_EDIT_FAIL,  
+    GET_COUNT_REQUEST,
+    GET_COUNT_SUCCESS,
+    GET_COUNT_FAIL,
+    CLEAR_ERRORS
 } from '../constants/formConstant';
 
 export const normFetch = (state ={formDetails:{}},action)=>{
@@ -113,8 +117,14 @@ export const formSubmission = (state ={res:{}},action)=>{
                 return{
                     loading:false,
                     data: null,
-                    error: action.payload
+                    error: "You can fill form only once! Please contact your administrator!"
                 }
+        case CLEAR_ERRORS: 
+          return{
+                    loading:false,
+                    data: null,
+                    error:null
+          }
          default:
             return state;
     }
@@ -197,3 +207,29 @@ export const quarterEdit = (state ={quarterDetails:{}},action)=>{
     }
 
 }
+
+
+export const countData = (state ={count:{}},action)=>{
+    switch(action.type){
+        case GET_COUNT_REQUEST:
+            return{
+                loading:true,
+            }
+        case GET_COUNT_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                count: action.payload.data.count  
+            }
+       
+        case GET_COUNT_FAIL:
+                return{
+                    loading:false,
+                    error: action.payload
+                }
+         default:
+            return state;
+    }
+
+}
+

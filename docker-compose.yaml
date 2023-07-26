@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    container_name: frontend-container
+    env_file:
+      - config2.env
+    networks:
+      - mern-stack-networks
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    container_name: backend-container
+    env_file:
+      - config.env
+    networks:
+      - mern-stack-networks
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    networks:
+      - mern-stack-networks
+    volumes:
+      - mongoData:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    command: ["mongod", "--auth"] # Enable MongoDB authentication
+    restart: unless-stopped
+
+networks:
+  mern-stack-networks:
+
+volumes:
+  mongoData:

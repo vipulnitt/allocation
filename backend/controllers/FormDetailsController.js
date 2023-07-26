@@ -3,7 +3,13 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError= require('../middleware/catchAsyncError');
 const QuarterDetails = require('../models/quarterDetails');
 exports.modifyTime = catchAsyncError(async (req,res,next)=>{
-    const formDetails = await FormDetails.findByIdAndUpdate("admin",req.body,{
+  let formDetails = await FormDetails.findById("admin");
+
+  if (!formDetails) {
+   
+    formDetails = await FormDetails.create({ _id: "admin" });
+  }
+    formDetails = await FormDetails.findByIdAndUpdate("admin",req.body,{
         new: true,
         runValidators:true,
         useFindAndModify: false 
@@ -19,8 +25,13 @@ exports.modifyTime = catchAsyncError(async (req,res,next)=>{
 
 
 exports.addNorms = catchAsyncError(async (req,res,next)=>{
-  console.log("acy"+req.body);
-  const formDetails = await FormDetails.findByIdAndUpdate("admin",req.body,{
+  let formDetails = await FormDetails.findById("admin");
+
+  if (!formDetails) {
+   
+    formDetails = await FormDetails.create({ _id: "admin" });
+  }
+  formDetails = await FormDetails.findByIdAndUpdate("admin",req.body,{
       new: true,
       runValidators:true,
       useFindAndModify: false 
@@ -45,7 +56,13 @@ exports.fetchNorms = catchAsyncError(async (req,res,next)=>{
 });
 
 exports.modifyTime2 = catchAsyncError(async (req,res,next)=>{
-  const formDetails= await QuarterDetails.findByIdAndUpdate("admin",req.body,{
+  let formDetails = await QuarterDetails.findById("admin");
+
+  if (!formDetails) {
+   
+    formDetails = await QuarterDetails.create({ _id: "admin" });
+  }
+ formDetails= await QuarterDetails.findByIdAndUpdate("admin",req.body,{
     new: true,
     runValidators:true,
     useFindAndModify: false 
@@ -60,7 +77,12 @@ exports.modifyTime2 = catchAsyncError(async (req,res,next)=>{
 
 
 exports.addQuarterDetails = catchAsyncError(async (req,res,next)=>{
-  console.log(JSON.stringify(req.body));
+  let formDetails = await QuarterDetails.findById("admin");
+
+  if (!formDetails) {
+   
+    formDetails = await QuarterDetails.create({ _id: "admin" });
+  }
   const quarterDetails = await QuarterDetails.findByIdAndUpdate("admin",req.body,{
       new: true,
       runValidators:true,
@@ -85,4 +107,5 @@ exports.fetchQuarter = catchAsyncError(async (req,res,next)=>{
       endTime:quarterDetails.endTime
     });
 });
+
 

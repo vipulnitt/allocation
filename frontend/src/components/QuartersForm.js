@@ -4,13 +4,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../actions/userAction';
+import { clearErrors } from '../actions/adminAction';
 const QuartersForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   useEffect(() => {
     dispatch(fetchQuarter());
   }, [dispatch]);
-  const { choices } = useSelector((state) => state.quarter);
+  const { choices,sTime,eTime} = useSelector((state) => state.quarter);
+  const { error, data } = useSelector((state) => state.formSubmission);
+
+  useEffect(() => {
+    if (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'You can submit the form only once.',
+        text: ``,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      dispatch(clearErrors());
+      dispatch(logoutUser());
+      navigate('/');
+    }
+    if (data) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Submitted Successfully.',
+        text: `Done!`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      dispatch(logoutUser());
+      navigate('/');
+    }
+  }, [error, data, dispatch, navigate]);
+
 
   const [priorityChoices, setPriorityChoices] = useState([]);
   const [formData, setFormData] = useState({
@@ -29,7 +59,26 @@ const QuartersForm = () => {
     scOrST: '',
     occupationDate: '',
   });
-
+  const [valid,setValid]= useState(false);
+  useEffect(()=>{
+   if(eTime&&sTime)
+   {
+    const currentTime = new Date();
+    const startTime = new Date(sTime);
+    const endTime = new Date(eTime);
+   
+    if(startTime>currentTime)
+    {
+       setValid(false);
+    }else if(endTime<currentTime)
+    {
+      setValid(false);
+    }else 
+    {
+      setValid(true);
+    }
+   }
+  },[eTime, sTime]);
   const handleChoiceSelection = (choice) => {
     if (!priorityChoices.includes(choice)) {
       setPriorityChoices([...priorityChoices, choice]);
@@ -45,6 +94,7 @@ const QuartersForm = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    
 
     // Convert form data according to the model
     const modelData = {
@@ -67,15 +117,7 @@ const QuartersForm = () => {
 
     dispatch(quarterFormSubmission(modelData))
 
-    Swal.fire({
-      icon: 'success',
-      title: 'Submitted Successfully.',
-      text: `Done!`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    dispatch(logoutUser());
-    navigate('/');
+  
   };
 
   const handleChange = (e) => {
@@ -86,6 +128,10 @@ const QuartersForm = () => {
     
     navigate('/');
   };
+  if(!valid)
+  {
+    return (<h1 className='d-flex justify-content-center'>Form is Closed... </h1>);
+  }
 
   return (
     <Fragment>

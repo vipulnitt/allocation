@@ -10,12 +10,18 @@ const Quarter = () => {
     const [otp,setOtp]= useState('');
     const [emailToSend,setEmail] = useState('');
     const dispatch = useDispatch();
+
+    
     function handleOtpClick(e)
     {
       e.preventDefault();
+      
       if(emailToSend)
       {
-        dispatch(otpRequest(emailToSend));
+        const emailPattern = /@nitt\.edu$/;
+        if(emailPattern.test(emailToSend))
+        {
+           dispatch(otpRequest(emailToSend));
         Swal.fire({
           icon: 'success',
           title: 'OTP Sent Successfully',
@@ -23,6 +29,16 @@ const Quarter = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        }else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'OOPS!',
+            text: "Invalid Email!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+      }
       }else
       {
         Swal.fire({

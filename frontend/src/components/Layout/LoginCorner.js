@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const LoginCorner = () => {
   return (
     <Fragment>
-        <div className="col-xl col-lg-3 col-md-6 col-sm-6 mb-3 h-100">
+        <div className="col-xl col-lg-3 col-md-6 col-sm-6 mb-3 h-20">
       <div className="card bg-primary">
                         <div className="card-header cardHead cardbg1">
                             
@@ -23,26 +23,7 @@ const LoginCorner = () => {
                                         </div>
                                     </div>
                                     </div>
-                                    <div className="card mb-0">
-                                    <div className="card-header card-header-inner" data-toggle="collapse"
-                                        data-parent="#accordion" href="#applicant_login">
-                                        <div className="linkcorner">
-                                           <Link to='/admin/login'>
-                                              Staff
-                                            </Link>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div className="card mb-0">
-                                    <div className="card-header card-header-inner" data-toggle="collapse"
-                                        data-parent="#accordion" href="#applicant_login">
-                                        <div className="linkcorner">
-                                           <Link >
-                                              Student 
-                                            </Link>
-                                        </div>
-                                    </div>
-                                    </div>
+                                   
                         </div>
      
     </div>

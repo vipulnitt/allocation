@@ -6,7 +6,7 @@ import { loadUser, logout } from '../../actions/adminAction';
 import Swal from 'sweetalert2';
 const Header = () => {
   const {admin,loading} =  useSelector(state=>state.auth);
- 
+  const {isUserAuthenticated,error} = useSelector(state=>state.userAuth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -63,7 +63,12 @@ const Header = () => {
                             </div>
 
                       </div>
-        ):(<></>)}
+        ):(isUserAuthenticated?(<Fragment></Fragment>):(<ul className="nav nav-tabs">
+        <li className="nav-item">
+          <Link className="nav-link active" aria-current="page" to="/admin/login">LOGIN</Link>
+        </li>
+     
+      </ul>))}
       
         
       </div>
