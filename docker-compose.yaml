@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:80"
-    container_name: frontend-container
+    container_name: frontend-container-quarter
     env_file:
       - config2.env
     networks:
@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
-    container_name: backend-container
+    container_name: backend-container-quarter
     env_file:
       - config.env
     networks:
@@ -35,7 +35,7 @@ services:
 
   mongo:
     image: mongo
-    container_name: mongo-container
+    container_name: mongo-container-quarter
     ports:
       - "27017:27017"
     networks:
