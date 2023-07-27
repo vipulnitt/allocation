@@ -20,6 +20,8 @@ import Quarter from "./components/Student/quarter";
 import ProtectedRouteUser from "./routes/ProtectedRoute";
 import Adminprofile from "./components/Adminprofile";
 import UpdatePassword from "./components/UpdatePassword";
+import Form1Data from "./components/Form1Data";
+import Form2Data from "./components/Form2Data";
 const App = () => {
   const {isAuthenticated,loading,user} = useSelector(state=> state.auth);
   const {isUserAuthenticated} = useSelector(state=>state.userAuth);
@@ -55,7 +57,7 @@ const App = () => {
         <ProtectedRouteUser isLoggedIn={isUserAuthenticated}>
           <QuartersForm/>
         </ProtectedRouteUser>
-      } Component={QuartersForm}/>
+      } exact/>
       <Route path='/student' Component={Student} />
       <Route path='/staff' Component={Quarter}/>
       <Route path='/admin' element={
@@ -82,6 +84,16 @@ const App = () => {
       <ProtectedRoute isLoggedIn={isAuthenticated}>
         <EditNorms/>
       </ProtectedRoute>
+    } exact/>
+    <Route path='/admin/form1submissions' element={
+      <ProtectedRoute isLoggedIn={isAuthenticated}>
+       <Form1Data/>
+       </ProtectedRoute>
+    } exact/>
+     <Route path='/admin/form2submissions' element={
+      <ProtectedRoute isLoggedIn={isAuthenticated}>
+      <Form2Data/>
+       </ProtectedRoute>
     } exact/>
     <Route path='/admin/quarterallocation' element={
       <ProtectedRoute isLoggedIn={isAuthenticated}>

@@ -151,9 +151,13 @@ const Form = () => {
             <option value="" disabled hidden>
               Select your department
             </option>
-            <option value="Department 1">Department 1</option>
-            <option value="Department 2">Department 2</option>
-            {/* Add more options for all B.Tech departments */}
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="ICE">ICE</option>
+            <option value="MECHANICAL">MECHANICAL</option>
+            
           </select>
 
           <label htmlFor="dateOfJoining">Date of Joining the Ph.D Programme</label>

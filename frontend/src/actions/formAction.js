@@ -24,7 +24,13 @@ import {
   GET_COUNT_REQUEST,
   GET_COUNT_SUCCESS,
   GET_COUNT_FAIL,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  SUBMISSIONS1_REQUEST,
+  SUBMISSIONS1_SUCCESS,
+  SUBMISSIONS1_FAIL,
+  SUBMISSIONS2_REQUEST,
+  SUBMISSIONS2_SUCCESS,
+  SUBMISSIONS2_FAIL
 } from '../constants/formConstant';
 
 export const fetchNorms = () => async (dispatch) => {
@@ -185,7 +191,7 @@ export const exportQuarterData = () => async (dispatch) => {
     });
     dispatch({
       type: FORM_DATA_SUCCESS,
-      payload: data
+      payload: data.data
     });
   } catch (error) {
     dispatch({
@@ -323,6 +329,99 @@ export const deleteAll2 = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_COUNT_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+export const form1submissions = (keyword='',currentPage=1) => async (dispatch) => {
+  try {
+    dispatch({ type: SUBMISSIONS1_REQUEST });
+    
+    let link =  `/api/v1/admin/form1submissions?keyword=${keyword}&page=${currentPage}`;
+  
+    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
+      withCredentials: true
+    });
+   
+    dispatch({
+      type: SUBMISSIONS1_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: SUBMISSIONS1_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
+export const form2submissions = (keyword='',currentPage=1) => async (dispatch) => {
+  try {
+    dispatch({ type: SUBMISSIONS2_REQUEST });
+    
+    let link =  `/api/v1/admin/form2submissions?keyword=${keyword}&page=${currentPage}`;
+  
+    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
+      withCredentials: true
+    });
+   // console.log(data);
+    dispatch({
+      type: SUBMISSIONS2_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: SUBMISSIONS2_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+export const deleteInform1= (_id) => async (dispatch) => {
+  try {
+    dispatch({ type: SUBMISSIONS1_REQUEST });
+    
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const data = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteIn1', {_id:_id},{
+      withCredentials: true,
+      ...config
+    });
+   
+    dispatch({
+      type: SUBMISSIONS1_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: SUBMISSIONS1_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
+export const deleteInform2= (_id) => async (dispatch) => {
+  try {
+    dispatch({ type: SUBMISSIONS2_REQUEST });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const data = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteIn2', {_id:_id},{
+      withCredentials: true,
+      ...config
+    });
+   
+    dispatch({
+      type: SUBMISSIONS2_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: SUBMISSIONS2_FAIL,
       payload: error.response.data.message
     });
   }

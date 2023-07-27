@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { count1, deleteAll1, editNorms, exportData, fetchNorms,modifyTime  } from "../actions/formAction";
+import { count1, deleteAll1, editNorms, fetchNorms,modifyTime  } from "../actions/formAction";
 import Swal from "sweetalert2";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import Loader from "../Loader";
+import { useNavigate } from "react-router-dom";
 
 const EditNorms = () => {
   const [normsArray, setNorms] = useState([]);
@@ -15,6 +16,7 @@ const EditNorms = () => {
   const { norms, loading,sTime,eTime } = useSelector((state) => state.form);
   const { data } = useSelector((state) => state.res);
   const {count} = useSelector(state=>state.countData);
+  const navigate =useNavigate();
 
   useEffect(() => {
     dispatch(fetchNorms());
@@ -52,7 +54,7 @@ const EditNorms = () => {
       timer: 1500,
     });
     // Use the jsonData object as needed (e.g., send it to an API, log it, etc.)
-    console.log(jsonData);
+  
   };
 
 
@@ -84,51 +86,11 @@ const EditNorms = () => {
   };
 
   const handleExport = () => {
-    dispatch(exportData());
+   // dispatch(exportData());
+     navigate('/admin/form1submissions');
   };
 
-  useEffect(() => {
-    if (data) {
-      customFunction(data.form);
-    }
-  }, [data]);
 
-  const customFunction = (data) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-    const fileData = new Blob([excelBuffer], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
-    });
-    FileSaver.saveAs(fileData, "exported_data.xlsx");
-  };
-
-  const handleDeleteAll=()=>{
-    Swal.fire({
-      title: 'Are you sure to delete all submissions?',
-      text: 'This action cannot be undone!',
-      icon: 'warning',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: 'No',
-      customClass: {
-        actions: 'my-actions',
-        confirmButton: 'order-2 mr-4',
-        denyButton: 'order-3',
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteAll1());
-        Swal.fire('deleted!', '', 'success')
-      } else if (result.isDenied) {
-        Swal.fire('not deleted', '', 'info')
-      }
-    })
-  }
 
   return (
     <Fragment>
@@ -138,16 +100,14 @@ const EditNorms = () => {
         <div className="mb-5 ml-3" >
         <div  style={{ display: "flex", marginTop: "1%" }} >
           <br />
-          <div className="mt-3">
+          <div className="mt-2">
             <b>Number of Submissions: {count&count}</b>
           </div>
        
-          <button id="ExportData" className="ml-5"  onClick={handleExport}>
-            Export Data
+          <button id="ExportData" className="ml-5 btn btn-success"  onClick={handleExport}>
+            View Submissions
           </button>
-          <button id="DeleteData" className="ml-5 btn btn-danger "  onClick={handleDeleteAll}>
-           Delete All Submissions
-          </button>
+         
         
          
         </div>

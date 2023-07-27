@@ -23,7 +23,13 @@ import {
     GET_COUNT_REQUEST,
     GET_COUNT_SUCCESS,
     GET_COUNT_FAIL,
-    CLEAR_ERRORS
+    CLEAR_ERRORS,
+    SUBMISSIONS1_REQUEST,
+    SUBMISSIONS1_SUCCESS,
+    SUBMISSIONS1_FAIL,
+    SUBMISSIONS2_FAIL,
+    SUBMISSIONS2_SUCCESS,
+    SUBMISSIONS2_REQUEST
 } from '../constants/formConstant';
 
 export const normFetch = (state ={formDetails:{}},action)=>{
@@ -223,6 +229,35 @@ export const countData = (state ={count:{}},action)=>{
             }
        
         case GET_COUNT_FAIL:
+                return{
+                    loading:false,
+                    error: action.payload
+                }
+         default:
+            return state;
+    }
+
+}
+
+export const formSubmissions = (state ={},action)=>{
+    switch(action.type){
+        case SUBMISSIONS1_REQUEST:
+        case SUBMISSIONS2_REQUEST:
+            return{
+                loading:true,
+            }
+        case SUBMISSIONS1_SUCCESS:
+        case SUBMISSIONS2_SUCCESS: 
+            return {
+                ...state,
+                loading:false,
+                count: action.payload.data.count,
+                submissions:action.payload.data.submissions,
+                resPerPage: action.payload.data.resPerPage
+            }
+       
+        case SUBMISSIONS1_FAIL:
+        case SUBMISSIONS2_FAIL:
                 return{
                     loading:false,
                     error: action.payload

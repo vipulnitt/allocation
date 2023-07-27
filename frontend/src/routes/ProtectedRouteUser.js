@@ -4,7 +4,7 @@ const ProtectedRoute = ({ isLoggedIn,children }) => {
   
  
 
-  if (!isLoggedIn&&!token) {
+  if (!isLoggedIn) {
    
     return <Navigate to="/" replace />;
   }

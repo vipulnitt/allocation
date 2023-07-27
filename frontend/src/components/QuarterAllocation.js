@@ -12,6 +12,7 @@ import {
   modifyTime2,
 } from "../actions/formAction";
 import Loader from "../Loader";
+import { useNavigate } from "react-router-dom";
 
 const QuarterAllocation = () => {
   const [choiceArray, setChoice] = useState([]);
@@ -19,6 +20,7 @@ const QuarterAllocation = () => {
   const [quarterNumber, setQuarterNumber] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const { choices, loading,sTime,eTime  } = useSelector((state) => state.quarter);
@@ -59,7 +61,7 @@ const QuarterAllocation = () => {
       timer: 1500,
     });
     // Use the jsonData object as needed (e.g., send it to an API, log it, etc.)
-    console.log(jsonData);
+   
   };
 
   const addQuarter = () => {
@@ -92,53 +94,12 @@ const QuarterAllocation = () => {
       timer: 1500,
     });
   };
-
   const handleExport = () => {
-    dispatch(exportQuarterData());
+     navigate('/admin/form2submissions');
+   // dispatch(exportQuarterData());
   };
 
-  useEffect(() => {
-    if (data) {
-      customFunction(data.formData);
-    }
-  }, [data]);
-
-  const customFunction = (data) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-    const fileData = new Blob([excelBuffer], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
-    });
-    FileSaver.saveAs(fileData, "exported_data.xlsx");
-  };
-
-  const handleDeleteAll=()=>{
-    Swal.fire({
-      title: 'Are you sure to delete all submissions?',
-      text: 'This action cannot be undone!',
-      icon: 'warning',
-      showDenyButton: true,
-      confirmButtonText: 'Yes',
-      denyButtonText: 'No',
-      customClass: {
-        actions: 'my-actions',
-        confirmButton: 'order-2 mr-4',
-        denyButton: 'order-3',
-      }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteAll2());
-        Swal.fire('deleted!', '', 'success')
-      } else if (result.isDenied) {
-        Swal.fire('not deleted', '', 'info')
-      }
-    })
-  }
+  
 
   return (
     <Fragment>
@@ -152,12 +113,10 @@ const QuarterAllocation = () => {
               <b>Number of Submissions: {count&count}</b>
             </div>
          
-            <button id="ExportData" className="ml-5"  onClick={handleExport}>
-              Export Data
+            <button id="ExportData"  className="ml-5 btn btn-success"  onClick={handleExport}>
+            View Submissions
             </button>
-            <button id="DeleteData" className="ml-5 btn btn-danger "  onClick={handleDeleteAll}>
-           Delete All Submissions
-          </button>
+           
           
            
           </div>
