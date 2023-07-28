@@ -1,14 +1,13 @@
+const connectDatabase = require('../config/database');
 const Admin = require('../models/admin');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://root:password@localhost:27017',{}).then(con=>{
-   console.log(`mongoDB database connected with host: ${con.connection.host}`)
-})
+
+connectDatabase();
 
 
 const defaultAdminCredentials = {
-  name: 'admin',
-  email: 'admin@nitt.edu',
-  password: 'password',
+  name: "admin",
+  email: "admin@nitt.edu",
+  password: "password"
 };
 
 
@@ -16,10 +15,10 @@ const seedDefaultAdmin = async () => {
   try {
   
     const existingAdmin = await Admin.findOne({ email: defaultAdminCredentials.email });
-
+    
     if (!existingAdmin) {
       
-      const newAdmin = await Admin.create(defaultAdminCredentials);
+      const newAdmin = await Admin.create({defaultAdminCredentials});
      
       console.log('Default admin user created successfully.');
     } else {
