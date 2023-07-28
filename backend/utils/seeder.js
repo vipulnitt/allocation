@@ -3,22 +3,18 @@ const Admin = require('../models/admin');
 
 connectDatabase();
 
-
-const defaultAdminCredentials = {
-  name: "admin",
-  email: "admin@nitt.edu",
-  password: "password"
-};
-
-
 const seedDefaultAdmin = async () => {
   try {
   
-    const existingAdmin = await Admin.findOne({ email: defaultAdminCredentials.email });
+    const existingAdmin = await Admin.findOne({ email: "admin@nitt.edu" });
     
     if (!existingAdmin) {
       
-      const newAdmin = await Admin.create({defaultAdminCredentials});
+      const newAdmin = await Admin.create({
+    "name": "admin",
+    "email": "admin@nitt.edu",
+    "password": "password"
+});
      
       console.log('Default admin user created successfully.');
     } else {
