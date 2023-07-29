@@ -18,7 +18,7 @@ exports.login = catchAsyncError(async (req, res,next) => {
     //reset password url
   
     
-    const message = `Your Otp for Login is ${otp}`
+    const message = `Welcome to Quarter Allocation NITT Portal.\nYour Otp for Login is ${otp}`
     
 
         try{

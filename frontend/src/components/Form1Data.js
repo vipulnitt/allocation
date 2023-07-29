@@ -108,8 +108,10 @@ const Form1Data = () => {
   if(showPopup)
   {
     return (<Fragment>
-       
-      <div className='card mb-3' key={sub._id} >
+      <br></br>
+       <div className='container justify-content-center'>
+     
+      <div className='card mb-1' key={sub._id} >
       <div className='card-header d-flex justify-content-between'><strong>Roll Number: {sub.RollNo} </strong><button className='btn btn-danger mr-5' onClick={closePopup}>close</button></div>
       <div className='card-body'>
       {Object.entries(sub).map(([key, value]) => (
@@ -120,6 +122,7 @@ const Form1Data = () => {
       ))}
        
       </div>
+    </div>
     </div>
       </Fragment>)
   }
@@ -134,7 +137,7 @@ const Form1Data = () => {
           <MetaData title={'Admin'} />
         
         
-          <div className='mt-3'>
+          <div className='mt-3 '>
             <button
               id='ExportData'
               className='ml-3 btn btn-success'
@@ -190,7 +193,7 @@ const Form1Data = () => {
                     <p>Name: {submission.Name}</p>
                     <p>Department: {submission.Department}</p>
                     <p>Contact: {submission.contact}</p>
-                    <p>Submission Time: {Date(submission.submissionTime)}</p>
+                    <p>Submission Time: {new Date(""+submission.submissionTime).toLocaleString()}</p>
                     <button className='btn btn-success' onClick={()=>openPopup(submission)} >Show</button>
                     <button className='btn btn-danger ml-3' onClick={()=>handleDelete(submission._id)} >Delete</button>
                   </div>

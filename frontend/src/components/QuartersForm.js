@@ -148,9 +148,25 @@ const QuartersForm = () => {
           <label htmlFor="designation">Designation</label>
           <input type="text" id="designation" name="designation" required onChange={handleChange} />
 
-          {/* Add other form fields here */}
           <label htmlFor="department">Department</label>
-          <input type="text" id="department" name="department" required onChange={handleChange} />
+          <select
+            id="department"
+            name="department"
+            onChange={handleChange}
+            required // Adding "required" to make this field mandatory
+          >
+            <option value="" disabled selected>
+              Select your department
+            </option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="ICE">ICE</option>
+            <option value="MECHANICAL">MECHANICAL</option>
+            
+          </select>
+          
 
           <label htmlFor="scalePay">Scale of Pay</label>
           <input type="text" id="scalePay" name="scalePay" required onChange={handleChange} />

@@ -22,6 +22,7 @@ import Adminprofile from "./components/Adminprofile";
 import UpdatePassword from "./components/UpdatePassword";
 import Form1Data from "./components/Form1Data";
 import Form2Data from "./components/Form2Data";
+import MetaData from "./components/Layout/MetaData";
 const App = () => {
   const {isAuthenticated,loading,user} = useSelector(state=> state.auth);
   const {isUserAuthenticated} = useSelector(state=>state.userAuth);
@@ -29,9 +30,10 @@ const App = () => {
     store.dispatch(loadUser());
   },[]);
  return (
-  
- 
- <div className="App">
+
+ <div className="App ">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
        <link
       rel="stylesheet"
       type="text/css"
@@ -48,6 +50,7 @@ const App = () => {
       type="text/css"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></link>
+    <MetaData title={'NITT'}/>
     <Router>
     <Header/>
     <Routes>

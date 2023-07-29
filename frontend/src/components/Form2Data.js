@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteAll1, deleteAll2, deleteInform2, exportData, exportQuarterData, form2submissions } from '../actions/formAction';
-import { useParams } from 'react-router-dom';
+import { deleteAll2, deleteInform2, exportQuarterData, form2submissions } from '../actions/formAction';
 import Swal from "sweetalert2";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
@@ -13,7 +12,7 @@ const Form2Data = () => {
     const dispatch = useDispatch();
     const [currentPage,setCurrentPage] = useState(1);
  
-    const params = useParams();
+  
     const [keyword,setKeyword] = useState('');
     const { data } = useSelector(state => state.res);
     const [flag, setFlag] = useState(false);
@@ -131,9 +130,11 @@ const Form2Data = () => {
     if(showPopup)
     {
       
-  
+      
       return (<Fragment>
-         
+          <br></br>
+       <div className='container justify-content-center'>
+     
         <div className='card mb-3' key={sub._id} >
         <div className='card-header d-flex justify-content-between'><strong>Email: {sub.email}</strong>  <button className='btn btn-danger mr-5' onClick={closePopup}>close</button></div>
         <div className='card-body'>
@@ -156,6 +157,7 @@ const Form2Data = () => {
         ))}
          
         </div>
+      </div>
       </div>
         </Fragment>)
     }
@@ -204,7 +206,7 @@ const Form2Data = () => {
             <p>Name: {submission.name}</p>
             <p>Department: {submission.department}</p>
             <p>Designation: {submission.designation}</p>
-            <p>Submission Time: {Date(submission.submissionTime)}</p>
+            <p>Submission Time: {new Date(""+submission.submissionTime).toLocaleString()}</p>
             <button className='btn btn-success' onClick={()=>openPopup(submission)} >Show</button>
             <button className='btn btn-danger ml-3' onClick={()=>handleDelete(submission._id)} >Delete</button>
           </div>

@@ -9,8 +9,11 @@ const Admin = () => {
       <MetaData title={'Admin'}/>
     
       <br/>
-<Link to="/admin/editnorms">APPLICATION FOR ALLOTMENT OF PG / QIP/ RSB QUARTERS</Link><br/>
+      <div className='ml-2 container'>
+      <Link to="/admin/editnorms">APPLICATION FOR ALLOTMENT OF PG / QIP/ RSB QUARTERS</Link><br/>
 <Link to="/admin/quarterallocation">APPLICATION FOR ALLOTMENT / RENEWAL / CHANGE OF RESIDENTIAL QUARTERS</Link>
+      </div>
+
     </div>
   )
 }

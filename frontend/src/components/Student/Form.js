@@ -148,7 +148,7 @@ const Form = () => {
             onChange={handleChange}
             required // Adding "required" to make this field mandatory
           >
-            <option value="" disabled hidden>
+             <option value="" disabled selected>
               Select your department
             </option>
             <option value="CSE">CSE</option>
