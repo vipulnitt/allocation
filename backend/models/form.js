@@ -27,8 +27,7 @@ const researchScholarSchema = new mongoose.Schema({
   },
   fellowship: {
     type: String,
-    enum: ['QIP', 'Full Time (Institute Fellowship)', 'Full Time (Under Project)', 'Full Time (without fellowship)'],
-    required: true
+    enum: ['QIP', 'Full Time (Institute Fellowship)', 'Full Time (Under Project)', 'Full Time (without fellowship)']
   },
   nameOfInstitute: {
     type: String

@@ -153,7 +153,8 @@ const QuartersForm = () => {
             id="department"
             name="department"
             onChange={handleChange}
-            required // Adding "required" to make this field mandatory
+            value={formData.department} 
+            required 
           >
             <option value="" disabled>
               Select your department
@@ -194,7 +195,7 @@ const QuartersForm = () => {
 
          
 <label htmlFor="maritalStatus">Marital status</label>
-<select name="maritalStatus" id="maritalStatus" value={formData.maritalStatus} onChange={handleChange}>
+<select name="maritalStatus" id="maritalStatus" value={formData.maritalStatus} onChange={handleChange}  required>
   <option value="" disabled hidden>Select an Option</option>
   <option>Married</option>
   <option>UnMarried</option>

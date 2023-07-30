@@ -97,14 +97,9 @@ const Form = () => {
       formData.Department.trim() !== '' &&
       formData.dateOfJoining.trim() !== '' &&
       formData.category.trim() !== '' &&
-      formData.fellowship.trim() !== '' &&
-      formData.nameOfInstitute.trim() !== '' &&
-      formData.typeOfInstitute.trim() !== '' &&
-      formData.scaleOfPayAndBasicPay.trim() !== '' &&
       formData.presentResidentialAddress.trim() !== '' &&
       formData.permanentAddress.trim() !== '' &&
       formData.maritalStatus.trim() !== '' &&
-      formData.dateOfMarriage.trim() !== '' &&
       formData.contact.trim() !== ''
     );
   };
@@ -218,7 +213,6 @@ const Form = () => {
             name="nameOfInstitute"
             value={formData.nameOfInstitute}
             onChange={handleChange}
-            required // Adding "required" to make this field mandatory
           />
 
           <label htmlFor="typeOfInstitute">Type of Institute (if under QIP)</label>
@@ -227,7 +221,6 @@ const Form = () => {
             id="typeOfInstitute"
             value={formData.typeOfInstitute}
             onChange={handleChange}
-            required // Adding "required" to make this field mandatory
           >
             <option value="" disabled hidden>
               Select an Option
@@ -246,7 +239,6 @@ const Form = () => {
             name="scaleOfPayAndBasicPay"
             value={formData.scaleOfPayAndBasicPay}
             onChange={handleChange}
-            required // Adding "required" to make this field mandatory
           />
 
           <label htmlFor="presentResidentialAddress">Present Residential Address</label>
@@ -291,7 +283,6 @@ const Form = () => {
             name="dateOfMarriage"
             value={formData.dateOfMarriage}
             onChange={handleChange}
-            required // Adding "required" to make this field mandatory
           />
 
           <label htmlFor="contact">Contact Phone Number/email id</label>
