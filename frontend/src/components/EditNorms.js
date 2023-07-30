@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { count1, deleteAll1, editNorms, fetchNorms,modifyTime  } from "../actions/formAction";
+import { count1, editNorms, fetchNorms,modifyTime  } from "../actions/formAction";
 import Swal from "sweetalert2";
-import * as FileSaver from "file-saver";
-import * as XLSX from "xlsx";
+import moment from 'moment-timezone';
+
 import Loader from "../Loader";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,9 @@ const EditNorms = () => {
   const { data } = useSelector((state) => state.res);
   const {count} = useSelector(state=>state.countData);
   const navigate =useNavigate();
+  const convertToTrichyTime = (utcTime) => {
+    return moment.utc(utcTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+  };
 
   useEffect(() => {
     dispatch(fetchNorms());
@@ -26,10 +29,10 @@ const EditNorms = () => {
   useEffect(() => {
     if(eTime)
     {
-      const date = new Date(sTime);
-      const edate = new Date(eTime);
-      setStartTime(date.toISOString().replace(/T|\.\d{3}Z/g, ' ').trim());
-      setEndTime(edate.toISOString().replace(/T|\.\d{3}Z/g, ' ').trim());
+      const date = sTime;
+      const edate = eTime;
+      setStartTime(date);
+      setEndTime(edate);
      
     }
     if (norms) {
@@ -39,9 +42,10 @@ const EditNorms = () => {
 
 
   const handleSaveTime = () => {
+    console.log(startTime);
     const jsonData = {
-      startTime: new Date(startTime),
-      endTime: new Date(endTime),
+      startTime: startTime,
+      endTime: endTime,
     };
 
    

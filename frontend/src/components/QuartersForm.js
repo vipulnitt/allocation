@@ -155,7 +155,7 @@ const QuartersForm = () => {
             onChange={handleChange}
             required // Adding "required" to make this field mandatory
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select your department
             </option>
             <option value="CSE">CSE</option>

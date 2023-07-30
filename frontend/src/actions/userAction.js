@@ -51,7 +51,7 @@ export const  otpVerify = (otp,email)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-    console.log(email+"x"+otp);
+
     const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/verifyotp',{email,otp},config);
     dispatch({
         type: OTP_VERIFY_SUCCESS,

@@ -24,7 +24,6 @@ import {
   GET_COUNT_REQUEST,
   GET_COUNT_SUCCESS,
   GET_COUNT_FAIL,
-  CLEAR_ERRORS,
   SUBMISSIONS1_REQUEST,
   SUBMISSIONS1_SUCCESS,
   SUBMISSIONS1_FAIL,
@@ -32,6 +31,7 @@ import {
   SUBMISSIONS2_SUCCESS,
   SUBMISSIONS2_FAIL
 } from '../constants/formConstant';
+
 
 export const fetchNorms = () => async (dispatch) => {
   try {

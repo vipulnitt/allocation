@@ -4,10 +4,10 @@ const validator = require('validator');
 
 const quarterDetailSchema= new mongoose.Schema({
   startTime:{
-    type:Date
+    type:String
   },
   endTime:{
-    type:Date
+    type:String
   },
 _id:String,
  quarters:[

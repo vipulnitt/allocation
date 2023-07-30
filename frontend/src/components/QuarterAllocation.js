@@ -1,13 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import * as FileSaver from "file-saver";
-import * as XLSX from "xlsx";
+
 import {
   count2,
-  deleteAll2,
   editQuarter,
-  exportQuarterData,
   fetchQuarter,
   modifyTime2,
 } from "../actions/formAction";
@@ -36,10 +33,10 @@ const QuarterAllocation = () => {
   useEffect(() => {
     if(eTime)
     {
-      const date = new Date(sTime);
-      const edate = new Date(eTime);
-      setStartTime(date.toISOString().replace(/T|\.\d{3}Z/g, ' ').trim());
-      setEndTime(edate.toISOString().replace(/T|\.\d{3}Z/g, ' ').trim());
+      const date = sTime;
+      const edate = eTime;
+      setStartTime(date);
+      setEndTime(edate);
     }
     if (choices) {
       setChoice(choices.map((choice) => choice.choice));
@@ -48,8 +45,8 @@ const QuarterAllocation = () => {
 
   const handleSaveTime = () => {
     const jsonData = {
-      startTime: new Date(startTime),
-      endTime: new Date(endTime)
+      startTime: startTime,
+      endTime: endTime
     };
   
     dispatch(modifyTime2(jsonData));

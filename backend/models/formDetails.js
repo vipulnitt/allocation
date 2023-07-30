@@ -10,10 +10,10 @@ _id:String,
   }
  ],
  startTime:{
-  type:Date
+  type:String
 },
 endTime:{
-  type:Date
+  type:String
 }
 },{_id:false});
 

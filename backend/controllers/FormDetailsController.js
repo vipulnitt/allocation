@@ -2,6 +2,11 @@ const FormDetails= require('../models/formDetails');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncError= require('../middleware/catchAsyncError');
 const QuarterDetails = require('../models/quarterDetails');
+const moment= require('moment-timezone');
+const convertToTrichyTime = (utcTime) => {
+  return moment.utc(utcTime).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+};
+
 exports.modifyTime = catchAsyncError(async (req,res,next)=>{
   let formDetails = await FormDetails.findById("admin");
 
