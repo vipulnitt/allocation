@@ -6,25 +6,44 @@ const Quarter = require("../models/quarterApplication");
 const QuarterDetails = require("../models/quarterDetails");
 const FormDetails = require("../models/formDetails");
 const APIFeatures = require("../utils/apiFeatures");
+const moment = require('moment-timezone');
+const currentT =()=> {
+  const istTimeZone = 'Asia/Kolkata';
+  
+const currentIST = moment().tz(istTimeZone);
+
+
+const currentISTString = currentIST.format('YYYY-MM-DDTHH:mm');
+
+return currentISTString;
+
+}
+
 exports.acceptForm = catchAsyncError(async (req, res, next) => {
-  const currentTime = new Date();
-
   const formDetails = await FormDetails.findById("admin");
+  const istTimeZone = 'Asia/Kolkata';
 
-  const startTime = new Date(formDetails.startTime);
-  const endTime = new Date(formDetails.endTime);
+  const currentTime = moment().tz(istTimeZone); // Get the current time in IST timezone
 
-  if (startTime > currentTime) {
+  const startTime = moment.tz(formDetails.startTime, 'YYYY-MM-DDTHH:mm', istTimeZone);
+  const endTime = moment.tz(formDetails.endTime, 'YYYY-MM-DDTHH:mm', istTimeZone);
+
+  console.log("Form start time:", startTime.format('YYYY-MM-DDTHH:mm'));
+  console.log("Form end time:", endTime.format('YYYY-MM-DDTHH:mm'));
+  console.log("Current time:", currentTime.format('YYYY-MM-DDTHH:mm'));
+
+  if (currentTime.isBefore(startTime)) {
     res.status(200).json({
       success: false,
-      error: "Form is not started",
+      error: "Form filling has not started yet.",
     });
-  } else if (endTime < currentTime) {
+  } else if (currentTime.isAfter(endTime)) {
     res.status(200).json({
       success: false,
-      error: "Form has been closed",
+      error: "Form filling has ended.",
     });
   } else {
+    // Form filling is allowed within the specified start and end time
     const {
       Name,
       Department,
@@ -68,6 +87,7 @@ exports.acceptForm = catchAsyncError(async (req, res, next) => {
     });
   }
 });
+
 exports.getFormsData = catchAsyncError(async (req, res, next) => {
   const form = await ResearchScholarForm.find();
   res.status(200).json({
@@ -76,23 +96,31 @@ exports.getFormsData = catchAsyncError(async (req, res, next) => {
   });
 });
 
+
 exports.acceptQuarterForm = catchAsyncError(async (req, res, next) => {
   const formDetails = await QuarterDetails.findById("admin");
-  const startTime = new Date(formDetails.startTime);
-  const endTime = new Date(formDetails.endTime);
-  const currentTime = new Date();
+  const istTimeZone = 'Asia/Kolkata';
 
-  if (startTime > currentTime) {
+  const startTime = moment.tz(formDetails.startTime, istTimeZone);
+  const endTime = moment.tz(formDetails.endTime, istTimeZone);
+  const currentTime = moment().tz(istTimeZone);
+
+  console.log("Form start time:", startTime.format('YYYY-MM-DDTHH:mm'));
+  console.log("Form end time:", endTime.format('YYYY-MM-DDTHH:mm'));
+  console.log("Current time:", currentTime.format('YYYY-MM-DDTHH:mm'));
+
+  if (currentTime.isBefore(startTime)) {
     res.status(200).json({
       success: false,
-      error: "Form is not started",
+      error: "Quarter form filling has not started yet.",
     });
-  } else if (endTime < currentTime) {
+  } else if (currentTime.isAfter(endTime)) {
     res.status(200).json({
       success: false,
-      error: "Form has been closed",
+      error: "Quarter form filling has ended.",
     });
   } else {
+    // Quarter form filling is allowed within the specified start and end time
     const {
       name,
       staffNumber,
@@ -131,6 +159,7 @@ exports.acceptQuarterForm = catchAsyncError(async (req, res, next) => {
       occupationDate,
       priorityChoices,
     });
+
     res.status(200).json({
       success: true,
       form,

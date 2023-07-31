@@ -22,19 +22,16 @@ const researchScholarSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['OC', 'OBC', 'SC', 'ST', 'PWD'],
     required: true
   },
   fellowship: {
-    type: String,
-    enum: ['QIP', 'Full Time (Institute Fellowship)', 'Full Time (Under Project)', 'Full Time (without fellowship)']
+    type: String
   },
   nameOfInstitute: {
     type: String
   },
   typeOfInstitute: {
-    type: String,
-    enum: ['Government', 'Government Aided', 'Private']
+    type: String
   },
   scaleOfPayAndBasicPay: {
     type: String
@@ -47,7 +44,6 @@ const researchScholarSchema = new mongoose.Schema({
   },
   maritalStatus: {
     type: String,
-    enum: ['Married', 'UnMarried'],
     required: true
   },
   dateOfMarriage: {

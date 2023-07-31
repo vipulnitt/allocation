@@ -123,7 +123,7 @@ export const formSubmission = (state ={res:{}},action)=>{
                 return{
                     loading:false,
                     data: null,
-                    error: "You can fill form only once! Please contact your administrator!"
+                    error: action.payload
                 }
         case CLEAR_ERRORS: 
           return{
