@@ -20,6 +20,7 @@ app.use(cors({
     res.header('Access-Control-Allow-Origin', 'https://allocation-r2jv.vercel.app');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
+ });
 
 const admin = require('./routes/admin');
 const user = require('./routes/user');
