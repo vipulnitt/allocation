@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors({
     origin: 'https://allocation-r2jv.vercel.app',
-    credentials: true, // Enable CORS credentials (cookies, authorization headers, etc.)
+    credentials: true,
   }));
 
   app.use((req, res, next) => {
