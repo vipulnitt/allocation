@@ -23,6 +23,7 @@ import UpdatePassword from "./components/UpdatePassword";
 import Form1Data from "./components/Form1Data";
 import Form2Data from "./components/Form2Data";
 import MetaData from "./components/Layout/MetaData";
+import Navbar from "./components/Layout/Navbar/Navbar"
 const App = () => {
   const {isAuthenticated,loading,user} = useSelector(state=> state.auth);
   const {isUserAuthenticated} = useSelector(state=>state.userAuth);
@@ -51,8 +52,9 @@ const App = () => {
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"></link>
     <MetaData title={'NITT'}/>
+    
     <Router>
-    <Header/>
+    <Navbar></Navbar>
     <Routes>
       <Route path='/' Component={Home}/>
       <Route path='/admin/login' Component={Login}/>

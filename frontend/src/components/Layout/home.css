@@ -1,0 +1,27 @@
+/* CSS for animations */
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .fadeIn {
+    animation: fadeIn 3s infinite; /* 1s duration and infinite loop */
+  }
+  
+  .fadeOut {
+    animation: fadeOut 3s infinite; /* 1s duration and infinite loop */
+  }
+  

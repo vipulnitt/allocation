@@ -88,12 +88,12 @@ const Login =()  => {
               />
             </div>
 
-            <Link to="/password/forgot" className="float-right mb-4">Forgot Password?</Link>
+           
   
             <button
               id="login_button"
               type="submit"
-              className="btn btn-block py-3"
+              className="btn btn-block bg-primary py-3"
             >
               LOGIN
             </button>

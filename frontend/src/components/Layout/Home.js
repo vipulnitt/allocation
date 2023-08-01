@@ -6,10 +6,11 @@ import { clearErrors } from "../../actions/adminAction";
 import NoticeBoard from "./NoticeBoard";
 import SliderComponent from "./SliderComponent";
 import { fetchNorms, fetchQuarter } from "../../actions/formAction";
+import '../Layout/home.css'
+
 
 const Home = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth
@@ -28,28 +29,41 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchQuarter());
   }, [dispatch]);
-  const { choices,sTime,eTime} = useSelector((state) => state.quarter);
-
+  const { choices, sTime, eTime } = useSelector((state) => state.quarter);
 
   const pictureSources = [
     "https://www.nitt.edu/home/about/Admin-Block-1.JPG",
     "https://www.nitt.edu/home/Octagon.jpg",
-    'https://www.nitt.edu/home/NITT-Main-Gate.JPG',
+    "https://www.nitt.edu/home/NITT-Main-Gate.JPG",
   ];
+  const [isVisible, setIsVisible] = useState(true);
+
+
 
   return (
     <Fragment>
-    
       <MetaData title={"National Institute of Technology, Trichy"} />
-     <div className="">
-     <div className="moving-component text-danger font-weight-bold">
-     {sTime?(<>APPLICATION FOR RESIDENTIAL QUARTERS will start at {new Date(sTime).toLocaleString()} and close at {new Date(eTime).toLocaleString()}</>):(<></>)}
-  </div>
-     </div>
+ 
+<div className="ml-2">
+      
+      <p className={isVisible ? 'fadeIn' : 'fadeOut'}>
+      {sTime ? (
+      <>
+      <div className="font-weight-bold text-danger">
+        APPLICATION FOR RESIDENTIAL QUARTERS will start at{" "}
+        {new Date(sTime).toLocaleString()} and close at{" "}
+        {new Date(eTime).toLocaleString()}
+        </div>
+      </>
+    ) : (
+      <></>
+    )}
+      </p>
+    </div>
+
       <div className="d-flex mt-3">
         <div>
           <div className="ml-4" style={{ flex: 1 }}>
-        
             <div>
               <h2>Forms</h2>
               <ul>
@@ -81,14 +95,11 @@ const Home = () => {
           </div>
         </div>
         <div className="container col-md-5  ">
-      <h3 className="text-center">Glimpses</h3>
-      <SliderComponent pictureSources={pictureSources} />
-    </div>
+          <h3 className="text-center">Glimpses</h3>
+          <SliderComponent pictureSources={pictureSources} />
+        </div>
       </div>
-
       <br />
-
-     
     </Fragment>
   );
 };
