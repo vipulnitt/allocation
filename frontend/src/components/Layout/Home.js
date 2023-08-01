@@ -40,6 +40,22 @@ const Home = () => {
 
 
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  const isAndroidPhone = screenWidth <= 480; // 480px is a common width for Android phones
+  const isLessThan10Inch = screenWidth <= 1280; // Assuming 1280px as the width of a 10-inch diagonal
+
   return (
     <Fragment>
       <MetaData title={"National Institute of Technology, Trichy"} />
@@ -61,7 +77,7 @@ const Home = () => {
       </p>
     </div>
 
-      <div className="d-flex mt-3">
+    <div className={isLessThan10Inch ? '' : 'd-flex mt-3'}>
         <div>
           <div className="ml-4" style={{ flex: 1 }}>
             <div>
@@ -94,6 +110,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        
         <div className="container col-md-5  ">
           <h3 className="text-center">Glimpses</h3>
           <SliderComponent pictureSources={pictureSources} />

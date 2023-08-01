@@ -94,6 +94,22 @@ const EditNorms = () => {
      navigate('/admin/form1submissions');
   };
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  const isAndroidPhone = screenWidth <= 480; // 480px is a common width for Android phones
+  const isLessThan10Inch = screenWidth <= 1280; // Assuming 1280px as the width of a 10-inch diagonal
+
 
 
   return (
@@ -102,7 +118,7 @@ const EditNorms = () => {
         <Loader />
       ) : (
         <div className="mb-5 ml-3" >
-        <div  style={{ display: "flex", marginTop: "1%" }} >
+        <div  style={{ display: 'flex', marginTop: "1%" }} >
           <br />
           <div className="mt-2">
             <b>Number of Submissions: {count&count}</b>
@@ -115,7 +131,7 @@ const EditNorms = () => {
         
          
         </div>
-          <div style={{ display: "flex", marginTop: "1%" }}>
+          <div style={{ display: isLessThan10Inch ? '' : 'flex', marginTop: "1%",marginRight: "5%" }}>
             Start at:
             <input
               style={{ flex: 2, marginLeft: "2%", marginRight: "2%" }}

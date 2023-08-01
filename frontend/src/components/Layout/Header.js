@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../actions/adminAction';
 import Swal from 'sweetalert2';
 const Header = () => {
+   
   const {admin,loading} =  useSelector(state=>state.auth);
   const {isUserAuthenticated,error} = useSelector(state=>state.userAuth);
   const dispatch = useDispatch();
