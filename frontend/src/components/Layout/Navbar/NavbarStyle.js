@@ -125,7 +125,8 @@ export const NavLink = styled(Link)`
 		bottom: 0;
 		right: 0;
 
-		border-bottom: 1px solid #fff;
+		border-bottom:
+		1px solid #fff;
 		border-right: 1px solid #fff;
 
 		opacity: 0;
