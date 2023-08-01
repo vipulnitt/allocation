@@ -70,22 +70,22 @@ export default function Navbar() {
           <Menu togglemenu={toggleMenu} ss={screenSize}>
             {admin ? (
               <>
-                <MenuItems togglemenu={toggleMenu} ss={screenSize}>
+                <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
                   <NavLink to="/admin" style={{ color: 'white' }}>
                     Home
                   </NavLink>
                 </MenuItems>
-                <MenuItems togglemenu={toggleMenu} ss={screenSize}>
+                <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
                   <NavLink to="/profile" style={{ color: 'white' }}>
                     Profile
                   </NavLink>
                 </MenuItems>
-                <MenuItems togglemenu={toggleMenu} ss={screenSize}>
+                <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
                   <NavLink to="/admin/notification" style={{ color: 'white' }}>
                     Notification
                   </NavLink>
                 </MenuItems>
-                <MenuItems togglemenu={toggleMenu} ss={screenSize}>
+                <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
                   <NavLink
                     to="/"
                     style={{ color: 'white' }}
@@ -97,7 +97,12 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <MenuItems togglemenu={toggleMenu} ss={screenSize}>
+                <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
+                  <NavLink to="/" style={{ color: 'white' }}>
+                    Home
+                  </NavLink>
+                </MenuItems>
+                <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
                   <NavLink to="/admin/login" style={{ color: 'white' }}>
                     Login
                   </NavLink>
