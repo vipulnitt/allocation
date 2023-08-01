@@ -12,7 +12,7 @@ const SliderComponent = ({ pictureSources }) => {
 
   useEffect(() => {
     // Start the interval when the component mounts
-    const interval = setInterval(updateIndex, 10000); // Change the interval time as per your requirement
+    const interval = setInterval(updateIndex, 3000); // Change the interval time as per your requirement
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);

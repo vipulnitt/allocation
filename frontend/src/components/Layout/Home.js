@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors } from "../../actions/adminAction";
 import NoticeBoard from "./NoticeBoard";
 import SliderComponent from "./SliderComponent";
+import { fetchNorms, fetchQuarter } from "../../actions/formAction";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -24,6 +25,12 @@ const Home = () => {
     }
   }, [dispatch, isAuthenticated, error]);
 
+  useEffect(() => {
+    dispatch(fetchQuarter());
+  }, [dispatch]);
+  const { choices,sTime,eTime} = useSelector((state) => state.quarter);
+
+
   const pictureSources = [
     "https://www.nitt.edu/home/about/Admin-Block-1.JPG",
     "https://www.nitt.edu/home/Octagon.jpg",
@@ -32,12 +39,17 @@ const Home = () => {
 
   return (
     <Fragment>
-      <br />
-
+    
       <MetaData title={"National Institute of Technology, Trichy"} />
-      <div className="d-flex">
+     <div className="">
+     <div className="moving-component text-danger font-weight-bold">
+     {sTime?(<>APPLICATION FOR RESIDENTIAL QUARTERS will start at {new Date(sTime).toLocaleString()} and close at {new Date(eTime).toLocaleString()}</>):(<></>)}
+  </div>
+     </div>
+      <div className="d-flex mt-3">
         <div>
           <div className="ml-4" style={{ flex: 1 }}>
+        
             <div>
               <h2>Forms</h2>
               <ul>

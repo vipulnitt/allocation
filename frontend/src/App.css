@@ -1840,4 +1840,18 @@ caption {
 .choice-list li {
   padding: 10px;
 }
+.moving-component {
+  position: absolute;
+  white-space: nowrap;
+  left: -100%; /* Initial position off the screen on the left */
+  animation: moveRightToLeft 30s linear infinite;
+}
 
+@keyframes moveRightToLeft {
+  from {
+    left: 0%; /* Start position on the right edge of the screen */
+  }
+  to {
+    left: 100%; /* End position off the screen on the left */
+  }
+}
