@@ -9,20 +9,17 @@ const researchScholarSchema = new mongoose.Schema({
    unique: true
   },
   Name: {
-    type: String,
-    required: true
+    type: String
   },
   Department: {
     type: String,
     required: true
   },
   dateOfJoining: {
-    type: String,
-    required: true
+    type: String
   },
   category: {
-    type: String,
-    required: true
+    type: String
   },
   fellowship: {
     type: String
@@ -43,15 +40,13 @@ const researchScholarSchema = new mongoose.Schema({
     type: String
   },
   maritalStatus: {
-    type: String,
-    required: true
+    type: String
   },
   dateOfMarriage: {
     type: String
   },
   contact: {
-    type: String,
-    required: true
+    type: String
   },
   submissionTime:{
     type: Date,
