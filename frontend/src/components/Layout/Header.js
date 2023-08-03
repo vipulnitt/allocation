@@ -34,7 +34,7 @@ const Header = () => {
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'left',
-    backgroundColor: 'blue',
+    backgroundColor: '#041570',
     minHeight: '100px', // Set a minimum height for the header
     height: 'auto', // Adjust the height value as per your requirement
   }}

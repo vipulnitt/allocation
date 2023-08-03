@@ -25,7 +25,7 @@ const NoticeBoard = () => {
 
   return (
     <div className="card mb-2 w-100 h-100">
-      <div className="card-header notificationbg bg-primary">
+      <div className="card-header notificationbg " style={{backgroundColor: '#041570'}}>
         <span className="text-white notification">
           <i className="fa fa-bullhorn"></i> Notice Board - For Students
         </span>
