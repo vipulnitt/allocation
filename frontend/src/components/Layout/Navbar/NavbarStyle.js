@@ -5,7 +5,7 @@ import { BiMenuAltRight, BiMenu } from 'react-icons/bi';
 export const Nav = styled.nav`
 	background-color:#041570;
 	color: #0000ff;
-	height: 70px;
+	height: 90px;
 
 	display: flex;
 	align-items: center;
@@ -30,10 +30,16 @@ export const Brand = styled.div`
 	height: 100%;
 
 	display: grid;
-	place-items: center;
+	place-items: left;
 `;
 
 export const BrandImage = styled.img`
+	width: 250%;
+	height: 100%;
+	object-fit: cover;
+`;
+
+export const BrandImage2 = styled.img`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;

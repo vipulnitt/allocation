@@ -79,18 +79,18 @@ const Student = (formType) => {
       
       
        return (<>
-       <div className="small-container">
+       <div className="small-container mt-4">
         <form onSubmit={handleClick}>
-        <label htmlFor="Otp">Enter Otp</label>
+        <label htmlFor="Otp">Enter OTP</label>
         <input
           id="otp"
           type="text"
-          name="otp"
+          name="OTP"
           placeholder=""
           value={otp}
           onChange={(e)=>{setOtp(e.target.value)}}
         />
-        <input style={{ marginTop: '12px' }} type="submit" value="Submit"  />
+        <input style={{ marginTop: '12px',backgroundColor:'#041570' }} type="submit" value="Submit"  />
         </form>
        
     </div>
@@ -99,20 +99,19 @@ const Student = (formType) => {
  return (
     
  <>
-<div className="small-container">
-        <h1>Enter your Webmail Id</h1>
+<div className="small-container mt-4">
+        <h3>Enter your Webmail Id</h3>
         <form onSubmit={handleOtpClick}>
-        <label htmlFor="webmail">Webmail Id</label>
         <input
           id="webmail"
           type="text"
           name="webmail"
-          placeholder="106120142@nitt.edu"
+          placeholder="RollNumber@nitt.edu"
           value={emailToSend}
           onChange={(e)=>{setEmail(e.target.value)}}
         />
          
-         <input style={{ marginTop: '12px' }} type="submit" value="SendOtp" />
+         <input style={{ marginTop: '12px', backgroundColor:'#041570' }} type="submit" value="Send OTP" />
         </form>
        
       

@@ -110,7 +110,7 @@ const QuarterAllocation = () => {
     };
   }, []);
   const isAndroidPhone = screenWidth <= 480; // 480px is a common width for Android phones
-  const isLessThan10Inch = screenWidth <= 1280; // Assuming 1280px as the width of a 10-inch diagonal
+  const isLessThan10Inch = screenWidth <= 580;
 
   return (
     <Fragment>
@@ -147,7 +147,7 @@ const QuarterAllocation = () => {
               value={endTime}
         onChange={(e) => setEndTime(e.target.value)}
             />
-            <button className="ml-1 mr-3"  onClick={handleSaveTime}>
+            <button className="ml-1 mr-3"  style={{backgroundColor:'#041570'}} onClick={handleSaveTime}>
               Save
             </button>
           </div>
@@ -188,11 +188,11 @@ const QuarterAllocation = () => {
           
           <br />
           <div className="d-flex justify-content-center" >
-            <button className="ml-2" onClick={addQuarter}>
+            <button className="ml-2" style={{backgroundColor:'#041570'}} onClick={addQuarter} >
               Add Quarter
             </button>
             <br /> <br />
-            <button className="ml-2" onClick={handleSave}>
+            <button className="ml-2" style={{backgroundColor:'#041570'}} onClick={handleSave}>
               Save
             </button>
           </div>

@@ -156,15 +156,26 @@ const QuartersForm = () => {
             value={formData.department} 
             required 
           >
-            <option value="" disabled>
+            <option value="" disabled selected>
               Select your department
             </option>
-            <option value="CSE">CSE</option>
-            <option value="ECE">ECE</option>
-            <option value="EEE">EEE</option>
-            <option value="CIVIL">CIVIL</option>
-            <option value="ICE">ICE</option>
-            <option value="MECHANICAL">MECHANICAL</option>
+            <option value="Architecture">Architecture</option>
+            <option value="Chemical Engineering">Chemical Engineering</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Computer Applications">Computer Applications</option>
+            <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+            <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+            <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+            <option value="Energy and Environment (CEESAT)">Energy and Environment (CEESAT)</option>
+            <option value="Humanities and Social Sciences">Humanities and Social Sciences</option>
+            <option value="Instrumentation and Control Engineering">Instrumentation and Control Engineering</option>
+            <option value="Management Studies">Management Studies</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Mechanical Engineering">Mechanical EngineeringL</option>
+            <option value="Metallurgical and Materials Engineering">Metallurgical and Materials Engineering</option>
+            <option value="Physics">Physics</option>
+            <option value="Production Engineering">Production Engineering</option>
             
           </select>
           

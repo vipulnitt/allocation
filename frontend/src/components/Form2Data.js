@@ -189,7 +189,7 @@ const Form2Data = () => {
       <div className="input-group mb-3">
         <input type="text" className="form-control" placeholder="search" aria-label="search" aria-describedby="basic-addon2" value={keyword} onChange={(e)=> setKeyword(e.target.value)}/>
         <div className="input-group-append">
-          <button className="btn  btn-primary" type="button"  onClick={onSearchHandle}>Search</button>
+          <button className="btn  btn-primary" style={{backgroundColor:'#041570'}} type="button"  onClick={onSearchHandle}>Search</button>
         </div>
       </div>
     </div>
@@ -215,7 +215,7 @@ const Form2Data = () => {
     </div>
  
 
-  {resPerPage<=count&&(<div className="d-flex justify-content-center mt-5">
+  {(<div className="d-flex justify-content-center mt-5">
     <Pagination activePage={currentPage} 
     itemsCountPerPage={resPerPage}
     totalItemsCount={count}

@@ -5,7 +5,7 @@ const sendToken = (admin, statusCode, res) => {
     const options = {
       expires: new Date(Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000),
       httpOnly: true,
-      secure: true, // Set secure flag based on environment
+      secure: 'auto', // Set secure flag based on environment
       sameSite: 'none', // Set sameSite attribute for cross-site cookies
     };
   

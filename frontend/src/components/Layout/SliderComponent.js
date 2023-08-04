@@ -19,12 +19,14 @@ const SliderComponent = ({ pictureSources }) => {
   }, []);
 
   const handlePrevClick = () => {
-    const prevIndex = currentPictureIndex === 0 ? pictureSources.length - 1 : currentPictureIndex - 1;
+    const prevIndex =
+      currentPictureIndex === 0 ? pictureSources.length - 1 : currentPictureIndex - 1;
     setCurrentPictureIndex(prevIndex);
   };
 
   const handleNextClick = () => {
-    const nextIndex = currentPictureIndex === pictureSources.length - 1 ? 0 : currentPictureIndex + 1;
+    const nextIndex =
+      currentPictureIndex === pictureSources.length - 1 ? 0 : currentPictureIndex + 1;
     setCurrentPictureIndex(nextIndex);
   };
 
@@ -34,14 +36,14 @@ const SliderComponent = ({ pictureSources }) => {
         id="slider-box"
         className="carousel slide"
         data-bs-ride="carousel"
-        style={{ height: '100%', overflow: 'hidden' }}
+        style={{ height: '300px', width: '100%', overflow: 'hidden' }}
       >
-        <div className="carousel-inner">
+        <div className="carousel-inner" style={{ height: '100%', width: '100%' }}>
           {pictureSources.map((src, index) => (
             <div
               key={index}
               className={`carousel-item ${index === currentPictureIndex ? 'active' : ''}`}
-              style={{ height: '100%' }}
+              style={{ height: '100%', width: '100%' }}
             >
               <img
                 src={src}
@@ -53,7 +55,9 @@ const SliderComponent = ({ pictureSources }) => {
           ))}
         </div>
         <button
-          className={`carousel-control-prev btn bg-transparent border-0 ${pictureSources.length === 1 ? 'd-none' : ''}`}
+          className={`carousel-control-prev btn bg-transparent border-0 ${
+            pictureSources.length === 1 ? 'd-none' : ''
+          }`}
           type="button"
           data-bs-target="#slider-box"
           data-bs-slide="prev"
@@ -63,7 +67,9 @@ const SliderComponent = ({ pictureSources }) => {
           <span className="visually-hidden">Previous</span>
         </button>
         <button
-          className={`carousel-control-next btn bg-transparent border-0 ${pictureSources.length === 1 ? 'd-none' : ''}`}
+          className={`carousel-control-next btn bg-transparent border-0 ${
+            pictureSources.length === 1 ? 'd-none' : ''
+          }`}
           type="button"
           data-bs-target="#slider-box"
           data-bs-slide="next"

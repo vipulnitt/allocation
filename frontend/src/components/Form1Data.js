@@ -175,6 +175,7 @@ const Form1Data = () => {
                       className='btn btn-primary'
                       type='button'
                       onClick={onSearchHandle}
+                      style={{backgroundColor:'#041570'}}
                     >
                       Search
                     </button>
@@ -201,7 +202,7 @@ const Form1Data = () => {
               ))}
           </div>
 
-          {resPerPage <= count && (
+          { (
             <div className='d-flex justify-content-center mt-5'>
               <Pagination
                 activePage={currentPage}

@@ -30,7 +30,7 @@ const NoticeBoard = () => {
           <i className="fa fa-bullhorn"></i> Notice Board - For Students
         </span>
       </div>
-      <div className="card-body notificationbody border border-primary notice-board">
+      <div className="card-body notificationbody border border-primary notice-board" >
         <div className="marquee">
           {notices &&
             notices.map((notice, index) => (

@@ -10,6 +10,7 @@ import {
   MobileMenuContainer,
   MobileMenu,
   MobileMenuHover,
+  BrandImage2,
 } from './NavbarStyle';
 import React, { useEffect, useState } from 'react';
 
@@ -17,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Swal from 'sweetalert2';
 import logo from './logo.png';
+import logo2 from './nitt.png';
 
 
 import { logout } from '../../../actions/adminAction';
@@ -57,7 +59,8 @@ export default function Navbar() {
       <Nav>
         <Container ss={screenSize}>
           <Brand>
-            <BrandImage src={logo} alt="logo" />
+          {menu?(<BrandImage2 src={logo} alt="logo" />):(<BrandImage src={logo2} alt="logo2" />)}
+         
           </Brand>
 
           <MobileMenuContainer

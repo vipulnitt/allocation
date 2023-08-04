@@ -93,7 +93,7 @@ const Login =()  => {
             <button
               id="login_button"
               type="submit"
-              className="btn btn-block bg-primary py-3"
+              className="btn btn-block  py-3" style={{backgroundColor:'#041570'}}
             >
               LOGIN
             </button>

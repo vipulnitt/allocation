@@ -107,8 +107,8 @@ const EditNorms = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  const isAndroidPhone = screenWidth <= 480; // 480px is a common width for Android phones
-  const isLessThan10Inch = screenWidth <= 1280; // Assuming 1280px as the width of a 10-inch diagonal
+  const isAndroidPhone = screenWidth <= 480; 
+  const isLessThan10Inch = screenWidth <= 586; 
 
 
 
@@ -146,7 +146,7 @@ const EditNorms = () => {
               value={endTime}
         onChange={(e) => setEndTime(e.target.value)}
             />
-            <button className="ml-1 mr-3"  onClick={handleSaveTime}>
+            <button className="ml-1 mr-3" style={{backgroundColor:'#041570'}}  onClick={handleSaveTime}>
               Save
             </button>
           </div>
@@ -176,11 +176,11 @@ const EditNorms = () => {
             />
             </div>
            <div className="text-center" >
-            <button  className="mt-3" onClick={addNorm}>
+            <button  className="mt-3" style={{backgroundColor:'#041570'}} onClick={addNorm}>
               Add Norm
             </button>
            
-            <button  className="ml-3 mt-3" onClick={handleSave}>
+            <button  className="ml-3 mt-3" style={{backgroundColor:'#041570'}} onClick={handleSave}>
               Save
             </button>
           

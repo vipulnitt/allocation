@@ -241,7 +241,7 @@ exports.deleteAllSubmission2 = catchAsyncError(async (req, res, next) => {
 });
 
 exports.getSubmissions1 = catchAsyncError(async (req, res, next) => {
-  const resPerPage = 1;
+  const resPerPage = 4;
   const Count = await ResearchScholarForm.countDocuments();
   const apiFeatures = new APIFeatures(ResearchScholarForm.find(), req.query)
     .search()
@@ -261,7 +261,7 @@ exports.getSubmissions1 = catchAsyncError(async (req, res, next) => {
 
 exports.getSubmissions2 = catchAsyncError(async (req, res, next) => {
 
-  const resPerPage = 3;
+  const resPerPage = 4;
   const Count = await Quarter.countDocuments();
   const apiFeatures = new APIFeatures(Quarter.find(), req.query)
     .search2()
