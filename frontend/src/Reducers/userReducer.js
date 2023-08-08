@@ -1,3 +1,4 @@
+import { LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from '../constants/adminConstant';
 import {
     OTP_REQUEST,
     OTP_SUCCESS,
@@ -43,13 +44,25 @@ export const userAuth = (state = {user:{}},action) =>{
                 isUserAuthenticated:false
             }
         case OTP_VERIFY_SUCCESS:
+        
             return {
                 ...state,
                 loading:false,
                 isUserAuthenticated:true,
                 userAuth: action.payload
             }
-        
+        case LOGOUT_USER_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                isUserAuthenticated:false,
+                userAuth: null
+            }
+        case LOGOUT_USER_FAIL:
+            return{
+                ...state,
+                error: action.payload
+            }
         case OTP_VERIFY_FAIL:
             return{
                 ...state,

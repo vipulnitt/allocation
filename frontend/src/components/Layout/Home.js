@@ -62,7 +62,7 @@ const Home = () => {
  
 <div className="ml-2">
       
-      <p className={isVisible ? 'fadeIn' : 'fadeOut'}>
+      <div className={isVisible ? 'fadeIn' : 'fadeOut'}>
       {sTime ? (
       <>
       <div className="font-weight-bold text-danger">
@@ -74,7 +74,7 @@ const Home = () => {
     ) : (
       <></>
     )}
-      </p>
+      </div>
     </div>
 
     <div className={isLessThan10Inch ? '' : 'd-flex mt-3'}>
@@ -117,6 +117,7 @@ const Home = () => {
         </div>
       </div>
       <br />
+      
     </Fragment>
   );
 };

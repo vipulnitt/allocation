@@ -7,6 +7,7 @@ import * as XLSX from "xlsx";
 import Pagination from 'react-js-pagination';
 import Loader from '../Loader';
 import MetaData from './Layout/MetaData';
+import { clearErrors } from '../actions/userAction';
 
 const Form2Data = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,23 @@ const Form2Data = () => {
           
       },[dispatch,error,currentPage]);
 
+      useEffect(()=>{
+        if(error){
+          
+          if(error){
+            
+            Swal.fire({
+              icon: 'error',
+              title: 'OOPS!',
+              text: error,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+          dispatch(clearErrors());
+      }
+      },[error])
+
       function setCurrentPageNo(pageNumber){
         setCurrentPage(pageNumber)
       }
@@ -32,8 +50,8 @@ const Form2Data = () => {
         dispatch(form2submissions(keyword,1));
        }
 
-      const handleExport = (e) => {
-        e.preventDefault();
+      const handleExport = () => {
+        
        setFlag(true);
       dispatch(exportQuarterData());
     };
@@ -67,8 +85,8 @@ const Form2Data = () => {
     
         let index = 1;
         while (item[`p${index}`]) {
-          rowData[`P${index}_StreetNumber`] = item[`p${index}`].StreetNumber;
-          rowData[`P${index}_QuarterNumber`] = item[`p${index}`].QuarterNumber;
+          rowData[`Priority${index}`] = item[`p${index}`].StreetNumber+"/"+item[`p${index}`].QuarterNumber;
+         
           index++;
         }
     
@@ -94,25 +112,25 @@ const Form2Data = () => {
     
   
     const handleDeleteAll=()=>{
+      handleExport();
       Swal.fire({
-        title: 'Are you sure to delete all submissions?',
-        text: 'This action cannot be undone!',
-        icon: 'warning',
-        showDenyButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: 'No',
-        customClass: {
-          actions: 'my-actions',
-          confirmButton: 'order-2 mr-4',
-          denyButton: 'order-3',
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          dispatch(deleteAll2());
-          Swal.fire('deleted!', '', 'success')
-        } else if (result.isDenied) {
-          Swal.fire('not deleted', '', 'info')
-        }
+        title: 'Enter Password to delete all submissions',
+        input: 'password',
+        inputAttributes: {
+          autocapitalize: 'off',
+          style: 'width: 90% ' 
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        confirmButtonColor: 'red', 
+        showLoaderOnConfirm: true,
+        preConfirm: (password) => {
+          
+            dispatch(deleteAll2(password));
+         
+  
+        },
+        allowOutsideClick: () => !Swal.isLoading()
       })
     }
 

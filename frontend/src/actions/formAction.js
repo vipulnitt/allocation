@@ -29,7 +29,10 @@ import {
   SUBMISSIONS1_FAIL,
   SUBMISSIONS2_REQUEST,
   SUBMISSIONS2_SUCCESS,
-  SUBMISSIONS2_FAIL
+  SUBMISSIONS2_FAIL,
+  PRE_SUBMISSIONS_REQUEST,
+  PRE_SUBMISSIONS_SUCCESS,
+  PRE_SUBMISSIONS_FAIL,
 } from '../constants/formConstant';
 
 
@@ -183,6 +186,41 @@ export const quarterFormSubmission = (data) => async (dispatch) => {
   }
 };
 
+export const preSubmission1= () => async (dispatch) => {
+  try {
+    dispatch({ type: PRE_SUBMISSIONS_REQUEST});
+    const res = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/user/presubmissionform1', {
+      withCredentials: true, // Include cookies in the request
+    });
+    dispatch({
+      type: PRE_SUBMISSIONS_SUCCESS,
+      payload: res
+    });
+  } catch (error) {
+    dispatch({
+      type:PRE_SUBMISSIONS_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+export const preSubmission2= () => async (dispatch) => {
+  try {
+    dispatch({ type: PRE_SUBMISSIONS_REQUEST});
+    const res = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/user/quartersubmission', {
+      withCredentials: true, // Include cookies in the request
+    });
+    dispatch({
+      type: PRE_SUBMISSIONS_SUCCESS,
+      payload: res
+    });
+  } catch (error) {
+    dispatch({
+      type:PRE_SUBMISSIONS_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
 export const exportQuarterData = () => async (dispatch) => {
   try {
     dispatch({ type: FORM_DATA_REQUEST });
@@ -289,46 +327,65 @@ export const count2 = () => async (dispatch) => {
   }
 };
 
-export const deleteAll1 = () => async (dispatch) => {
+export const deleteAll1 = (password,keyword='',currentPage=1) => async (dispatch) => {
   try {
-    dispatch({ type: GET_COUNT_REQUEST });
+    dispatch({ type: SUBMISSIONS1_REQUEST });
     
     
-    await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall1', {
-      withCredentials: true
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall1',{password} ,{
+      withCredentials: true,
+      ...config
     });
-    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/submissioncount', {
+    let link =  `/api/v1/admin/form1submissions?keyword=${keyword}&page=${currentPage}`;
+  
+    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
       withCredentials: true
     });
     dispatch({
-      type: GET_COUNT_SUCCESS,
+      type: SUBMISSIONS1_SUCCESS,
       payload: data
     });
+    
+   
   } catch (error) {
     dispatch({
-      type: GET_COUNT_FAIL,
+      type: SUBMISSIONS1_FAIL,
       payload: error.response.data.message
     });
   }
 };
-export const deleteAll2 = () => async (dispatch) => {
+export const deleteAll2 = (password,keyword='',currentPage=1) => async (dispatch) => {
   try {
-    dispatch({ type: GET_COUNT_REQUEST });
+    dispatch({ type: SUBMISSIONS2_REQUEST });
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
     
-    
-    await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall2', {
+    await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall2',{password} ,{
+      withCredentials: true,
+      ...config
+    });
+    let link =  `/api/v1/admin/form2submissions?keyword=${keyword}&page=${currentPage}`;
+  
+    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
       withCredentials: true
     });
-    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/quartersubmissioncount', {
-      withCredentials: true
-    });
+   
     dispatch({
-      type: GET_COUNT_SUCCESS,
+      type: SUBMISSIONS2_SUCCESS,
       payload: data
     });
   } catch (error) {
     dispatch({
-      type: GET_COUNT_FAIL,
+      type: SUBMISSIONS2_FAIL,
       payload: error.response.data.message
     });
   }

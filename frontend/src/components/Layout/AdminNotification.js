@@ -66,7 +66,7 @@ const AdminNotification = () => {
       <div className="small-container mt-5">
         <input type="text" value={input} onChange={handleInputChange} />
         <input type="file" id="myFile" name="filename" onChange={handleFileChange} />
-        <button className="ml-2" onClick={handleSubmit}>
+        <button className="ml-2"  style={{backgroundColor:'#041570'}} onClick={handleSubmit}>
           Submit
         </button>
       </div>

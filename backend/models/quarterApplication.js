@@ -17,6 +17,8 @@ const quarterSchema = new mongoose.Schema({
   applicationType: { type: String },
   scOrST: { type: String },
   occupationDate: { type: String },
+  quarterPresentlyAllocated: { type: String },
+  remarks: { type: String },
   priorityChoices: [{ 
     choice: {
       streetNumber: { type: String },

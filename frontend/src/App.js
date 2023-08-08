@@ -24,6 +24,7 @@ import Form1Data from "./components/Form1Data";
 import Form2Data from "./components/Form2Data";
 import MetaData from "./components/Layout/MetaData";
 import Navbar from "./components/Layout/Navbar/Navbar"
+import Pdfdownload from "./components/web/PdfDownload";
 const App = () => {
   const {isAuthenticated,loading,user} = useSelector(state=> state.auth);
   const {isUserAuthenticated} = useSelector(state=>state.userAuth);
@@ -57,6 +58,7 @@ const App = () => {
     <Navbar></Navbar>
     <Routes>
       <Route path='/' Component={Home}/>
+      <Route path='/pdf' Component={Pdfdownload}/>
       <Route path='/admin/login' Component={Login}/>
       <Route path='/staff/quarterallocation' element={
         <ProtectedRouteUser isLoggedIn={isUserAuthenticated}>

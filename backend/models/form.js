@@ -1,59 +1,65 @@
-const mongoose = require('mongoose');
-const validator = require('validator');
-
+const mongoose = require("mongoose");
+const validator = require("validator");
 
 const researchScholarSchema = new mongoose.Schema({
-  RollNo:{
-   type: String,
-   required: true,
-   unique: true
+  RollNo: {
+    type: String,
+    required: true,
+    unique: true,
   },
   Name: {
-    type: String
+    type: String,
   },
   Department: {
     type: String,
-    required: true
+    required: true,
   },
   dateOfJoining: {
-    type: String
+    type: String,
   },
   category: {
-    type: String
+    type: String,
   },
   fellowship: {
-    type: String
+    type: String,
   },
   nameOfInstitute: {
-    type: String
+    type: String,
   },
   typeOfInstitute: {
-    type: String
+    type: String,
   },
   scaleOfPayAndBasicPay: {
-    type: String
+    type: String,
   },
   presentResidentialAddress: {
-    type: String
+    type: String,
   },
   permanentAddress: {
-    type: String
+    type: String,
   },
   maritalStatus: {
-    type: String
+    type: String,
   },
   dateOfMarriage: {
-    type: String
+    type: String,
   },
   contact: {
-    type: String
+    type: String,
   },
-  submissionTime:{
+  guide: { type: String },
+  tenureCompleted: { type: String },
+  remarks: { type: String },
+
+  submissionTime: {
     type: Date,
-    default: Date.now
-}
+    default: Date.now,
+  },
 });
 
-const ResearchScholarForm = mongoose.model('ResearchScholarForm', researchScholarSchema);
+const ResearchScholarForm = mongoose.model(
+  "ResearchScholarForm",
+  researchScholarSchema
+);
 
 module.exports = ResearchScholarForm;

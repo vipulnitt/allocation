@@ -2,7 +2,7 @@ import React ,{Fragment, useEffect, useState}from 'react'
 import MetaData from '../Layout/MetaData';
 import Loader from '../../Loader.js'
 import { Link, useNavigate } from 'react-router-dom';
-import {login, clearErrors} from '../../actions/adminAction'
+import {login, clearErrors, loadUser} from '../../actions/adminAction'
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
@@ -14,6 +14,7 @@ const Login =()  => {
  const {isAuthenticated,error, loading,token}= useSelector(state=>state.auth);
   useEffect(()=>{
     if(isAuthenticated) {
+      dispatch(loadUser());
       Swal.fire({
         icon: 'success',
         title: 'Logged In',

@@ -97,7 +97,7 @@ const UpdatePassword = () => {
                     onChange={e => setConfirmPassword(e.target.value)}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary" >Update Password</button>
+                <button type="submit" className="btn btn-primary"  style={{backgroundColor:'#041570'}} >Update Password</button>
               </form>
             </div>
           </div>

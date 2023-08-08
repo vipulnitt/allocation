@@ -1,0 +1,77 @@
+
+.header{
+  border-style: solid;
+  border-color:black;
+}
+.headerimage{
+  height:133px;
+  width:133px;
+  float:left;
+  /* border-style :solid; */
+  margin:0px auto;
+}
+
+.logo{
+
+  width: 125px;
+  height:125px;
+  /* border-style :solid; */
+}
+
+.headertext{
+  height: 136px;
+  width:1460px;
+  float:left;
+  /* margin-top:15px; */
+
+ 
+}
+
+
+.text{
+  color:black;
+  font-size:30px;
+  text-align:center;
+  font-family:Arial, Helvetica, sans-serif;
+  margin-top:16px;
+}
+
+.table,th,td{
+  border : 2px solid;
+  border-collapse: collapse;
+  color: black;
+}
+table {
+  margin-left:auto;
+  margin-right:auto;
+  width: 80%;
+} 
+td {
+  height:50px;
+  border: 2px solid #000;
+  padding: 0px;
+}
+.column{
+  font-size:18px;
+  margin-left:10px;
+}
+.serialNO{
+  font-size:20px;
+  text-align : center;
+}
+.inputform{
+  font-size:20px;
+  margin-left: 10px;
+}
+.certificate{
+  font-size:20px;
+  margin-left : 30px;
+  margin-right:30px;
+}
+.nameofapplicant{
+  font-size:20px;
+}
+.sign{
+  font-size:20px;
+  margin-left:700px;
+}

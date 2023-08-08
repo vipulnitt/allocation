@@ -29,7 +29,10 @@ import {
     SUBMISSIONS1_FAIL,
     SUBMISSIONS2_FAIL,
     SUBMISSIONS2_SUCCESS,
-    SUBMISSIONS2_REQUEST
+    SUBMISSIONS2_REQUEST,
+    PRE_SUBMISSIONS_REQUEST,
+    PRE_SUBMISSIONS_SUCCESS,
+    PRE_SUBMISSIONS_FAIL
 } from '../constants/formConstant';
 
 export const normFetch = (state ={formDetails:{}},action)=>{
@@ -258,6 +261,38 @@ export const formSubmissions = (state ={},action)=>{
        
         case SUBMISSIONS1_FAIL:
         case SUBMISSIONS2_FAIL:
+                return{
+                    loading:false,
+                    error: action.payload
+                }
+        case CLEAR_ERRORS:
+            return {
+                loading:false,
+                error:null
+            }
+         default:
+            return state;
+    }
+
+}
+
+export const preSubmission = (state ={},action)=>{
+    switch(action.type){
+        
+        case PRE_SUBMISSIONS_REQUEST:
+            return{
+                loading:true,
+            }
+       
+        case PRE_SUBMISSIONS_SUCCESS: 
+            return {
+                ...state,
+                loading:false,
+                submissions:action.payload.data.form
+             
+            }
+       
+        case PRE_SUBMISSIONS_FAIL:
                 return{
                     loading:false,
                     error: action.payload

@@ -49,6 +49,7 @@ exports.loginAdmin = catchAsyncError(async (req, res, next)=>{
 exports.getAdminProfile = catchAsyncError(async (req,res,next)=>{
     console.log(JSON.stringify(req.body)+"");
     const admin = await Admin.findById(req.admin.id);
+   
     res.status(200).json({
       success:true,
       admin

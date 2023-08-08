@@ -14,6 +14,7 @@ services:
       - mern-stack-networks
     volumes:
       - ./frontend:/app
+    restart: unless-stopped
     depends_on:
       - backend
 
@@ -30,6 +31,7 @@ services:
       - mern-stack-networks
     volumes:
       - ./backend:/app
+    restart: unless-stopped
     depends_on:
       - mongo
 

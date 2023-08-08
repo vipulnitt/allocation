@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import MetaData from './Layout/MetaData';
 
 const Admin = () => {
-   
+  
+
   return (
     <div>
       <MetaData title={'Admin'}/>

@@ -1,15 +1,17 @@
-import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader';
 import { useNavigate } from 'react-router-dom';
 
+
 const Adminprofile = () => {
   const { loading, admin } = useSelector(state => state.auth);
+
   const navigate = useNavigate();
   const handleOnchangePassword = () => {
      navigate('/admin/updatepassword')
     };
-
+   
   return (
     <Fragment>
       {loading ? (
@@ -31,7 +33,7 @@ const Adminprofile = () => {
 
                   <p>Created At: {new Date(""+admin.createAt).toLocaleString()}</p>
                   <div className="mt-4">
-                    <button className="btn btn-primary" onClick={handleOnchangePassword}>Update Password</button>
+                    <button className="btn btn-primary"  style={{backgroundColor:'#041570'}} onClick={handleOnchangePassword}>Update Password</button>
                   
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchNorms, formSubmission } from '../../actions/formAction';
+import { fetchNorms, formSubmission, preSubmission1 } from '../../actions/formAction';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { logoutUser } from '../../actions/userAction';
@@ -23,14 +23,44 @@ const Form = () => {
     maritalStatus: '',
     dateOfMarriage: '',
     contact: '',
+    guide: '',
+    tenureCompleted: '',
+    remarks: '',
   });
 
   useEffect(() => {
     dispatch(fetchNorms());
+    dispatch(preSubmission1());
   }, [dispatch]);
 
   const { norms, sTime, eTime, loading } = useSelector((state) => state.form);
   const { error, data } = useSelector((state) => state.formSubmission);
+  const { submissions} = useSelector((state) => state.preSubmission);
+
+  useEffect(()=>{
+     if(submissions)
+     {
+      console.log(JSON.stringify(submissions));
+    const temp={  Name: submissions.Name||'',
+      Department: submissions.Department ||'',
+      dateOfJoining: submissions.dateOfJoining||'',
+      category: submissions.category||'',
+      fellowship: submissions.fellowship|| '',
+      nameOfInstitute: submissions.nameOfInstitute||'',
+      typeOfInstitute: submissions.typeOfInstitute||'',
+      scaleOfPayAndBasicPay: submissions.scaleOfPayAndBasicPay||'',
+      presentResidentialAddress: submissions.presentResidentialAddress||'',
+      permanentAddress: submissions.permanentAddress||'',
+      maritalStatus: submissions.maritalStatus||'',
+      dateOfMarriage:submissions.dateOfMarriage|| '',
+      contact: submissions.contact||'',
+      guide: submissions.guide||'',
+      tenureCompleted: submissions.tenureCompleted||'',
+      remarks: submissions.remarks||'',
+     }
+     setFormData(temp);
+    }
+    },[submissions]);
 
   useEffect(() => {
     if (error) {
@@ -74,35 +104,13 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Convert form data to JSON
-    const jsonData = JSON.stringify(formData);
-    // Check if all required fields are filled before submitting the form
-    if (isFormValid()) {
+
+  
       dispatch(formSubmission(formData));
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Please fill all required fields.',
-        text: ``,
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
+    
   };
 
-  const isFormValid = () => {
-    // Add logic to check if all required fields are filled
-    return (
-      formData.Name.trim() !== '' &&
-      formData.Department.trim() !== '' &&
-      formData.dateOfJoining.trim() !== '' &&
-      formData.category.trim() !== '' &&
-      formData.presentResidentialAddress.trim() !== '' &&
-      formData.permanentAddress.trim() !== '' &&
-      formData.maritalStatus.trim() !== '' &&
-      formData.contact.trim() !== ''
-    );
-  };
+  
 
   const handleChange = (e) => {
     setFormData({
@@ -143,7 +151,7 @@ const Form = () => {
             onChange={handleChange}
             required // Adding "required" to make this field mandatory
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select your department
             </option>
             <option value="Architecture">Architecture</option>
@@ -300,8 +308,39 @@ const Form = () => {
               <></>
             )
           }
+          <label htmlFor="tenure">Tenure Completed</label>
+            <input
+              id="tenureCompleted"
+              type="number"
+              name="tenureCompleted"
+              value={formData.tenureCompleted}
+              required
+              onChange={handleChange}
+            />
+             <label htmlFor="guide">Guide Name</label>
+            <input
+              id="guide"
+              type="text"
+              name="guide"
+              value={formData.guide}
+              required
+              onChange={handleChange}
+            />
 
-          <label htmlFor="contact">Contact Phone Number/email id</label>
+        <label htmlFor="remarks">Remarks</label>
+            <input
+              id="remarks"
+              type="text"
+              name="remarks"
+              value={formData.remarks}
+              required
+              onChange={handleChange}
+            />
+
+         
+            
+
+          <label htmlFor="contact">Contact Phone Number / Email id</label>
           <input
             id="contact"
             type="text"
@@ -312,11 +351,11 @@ const Form = () => {
           />
 
           <div>
-            <h5>NORMS FOR PG/ QIP/ RESEARCH QUARTERS ALLOTMENT</h5>
+            <h5>NORMS FOR FULL-TIME / QIP SCHOLARS ALLOTMENT</h5>
             {norms &&
-              norms.map((norm) => {
+              norms.map((norm, index)=> {
                 return (
-                  <Fragment key={norm.id}>
+                  <Fragment key={index}>
                     {norm.statement}
                     <br />
                   </Fragment>
