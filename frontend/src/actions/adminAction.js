@@ -36,8 +36,20 @@ const apiURL = process.env.REACT_APP_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: apiURL,
-  withCredentials: true // Set withCredentials to true for all requests
+  withCredentials: false
 });
+let token = localStorage.getItem('token');
+axiosInstance.interceptors.request.use(
+  (config) => {
+    if (token) {
+      config.headers['token'] = `${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -51,6 +63,7 @@ export const login = (email, password) => async (dispatch) => {
     };
     const { data } = await axiosInstance.post('/api/v1/login', { email, password }, config);
     localStorage.setItem('token', data.token);
+    axiosInstance.defaults.headers.common['token'] = `${data.token}`;
     dispatch({
       type: LOGIN_SUCCESS,
       payload: data
@@ -92,6 +105,8 @@ export const loadUser = () => async (dispatch) => {
     dispatch({
       type: LOAD_USER_REQUEST
     });
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     const { data } = await axiosInstance.post('/api/v1/profile');
     dispatch({
       type: LOAD_USER_SUCCESS,
@@ -107,6 +122,8 @@ export const loadUser = () => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     await axiosInstance.post('/api/v1/logout');
     localStorage.removeItem('token');
     // Remove the token from the cookies on the frontend
@@ -138,6 +155,8 @@ export const updateProfile = (userData) => async (dispatch) => {
         'Content-Type': 'multipart/form-data'
       }
     };
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     const { data } = await axiosInstance.put('/api/v1/profile/update', userData, config);
     dispatch({
       type: UPDATE_PROFILE_SUCCESS,
@@ -161,6 +180,8 @@ export const updatePassword = (passwords) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     console.log(JSON.stringify(passwords));
     const { data } = await axiosInstance.put('/api/v1/password/update', passwords, config);
     dispatch({
@@ -231,6 +252,8 @@ export const addNotification = (formData) => async (dispatch) => {
         'Content-Type': 'multipart/form-data'
       }
     };
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     const { result } = await axiosInstance.post(`/api/v1/addnotification`, formData, config);
     const { data } = await axiosInstance.get('/api/v1/getnotifications');
     dispatch({

@@ -34,14 +34,32 @@ import {
   PRE_SUBMISSIONS_SUCCESS,
   PRE_SUBMISSIONS_FAIL,
 } from '../constants/formConstant';
+const apiURL = process.env.REACT_APP_API_URL;
 
+const axiosInstance = axios.create({
+  baseURL: apiURL,
+  withCredentials: false
+});
+let token = localStorage.getItem('token');
+let tokenUser = localStorage.getItem('tokenUser');
+axiosInstance.interceptors.request.use(
+  (config) => {
+    console.log(tokenUser);
+    if (tokenUser||token) {
+      config.headers['token'] = `${token}`;
+      config.headers['tokenUser'] = `${tokenUser}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const fetchNorms = () => async (dispatch) => {
   try {
     dispatch({ type: NORM_REQUEST });
-    const { data } = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/fetchnorms', {
-      withCredentials: true // Include cookies in the request
-    });
+    const { data } = await axiosInstance.get('/api/v1/fetchnorms');
     dispatch({
       type: NORM_SUCCESS,
       payload: data
@@ -62,8 +80,9 @@ export const editNorms = (norms) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/addnorms`, norms, {
-      withCredentials: true, // Include cookies in the request
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const { data } = await axiosInstance.put(`/api/v1/addnorms`, norms, {
       ...config
     });
     dispatch({
@@ -86,10 +105,12 @@ export const formSubmission = (data) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const res = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/user/form', data, {
-      withCredentials: true, // Include cookies in the request
+    let tokenUser = localStorage.getItem('tokenUser');
+axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
+    const res = await axiosInstance.post( '/api/v1/user/form', data, {
       ...config
     });
+
     dispatch({
       type: SUBMISSION_SUCCESS,
       payload: res
@@ -105,9 +126,9 @@ export const formSubmission = (data) => async (dispatch) => {
 export const exportData = () => async (dispatch) => {
   try {
     dispatch({ type: FORM_DATA_REQUEST });
-    const { data } = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/formdata', {
-      withCredentials: true // Include cookies in the request
-    });
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const { data } = await axiosInstance.get('/api/v1/admin/formdata');
     dispatch({
       type: FORM_DATA_SUCCESS,
       payload: data
@@ -123,9 +144,7 @@ export const exportData = () => async (dispatch) => {
 export const fetchQuarter = () => async (dispatch) => {
   try {
     dispatch({ type: QUARTER_REQUEST });
-    const { data } = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/fetchquarterDetails', {
-      withCredentials: true // Include cookies in the request
-    });
+    const { data } = await axiosInstance.get('/api/v1/fetchquarterDetails');
     dispatch({
       type: QUARTER_SUCCESS,
       payload: data
@@ -146,8 +165,9 @@ export const editQuarter = (quarter) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const { data } = await axios.put(process.env.REACT_APP_API_URL + '/api/v1/addquarterDetails', quarter, {
-      withCredentials: true, // Include cookies in the request
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const { data } = await axiosInstance.put('/api/v1/addquarterDetails', quarter, {
       ...config
     });
     dispatch({
@@ -170,10 +190,12 @@ export const quarterFormSubmission = (data) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const res = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/user/quarterform', data, {
-      withCredentials: true, // Include cookies in the request
+    let tokenUser = localStorage.getItem('tokenUser');
+axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
+    const res = await axiosInstance.post('/api/v1/user/quarterform', data, {
       ...config
     });
+
     dispatch({
       type: SUBMISSION_SUCCESS,
       payload: res
@@ -189,9 +211,9 @@ export const quarterFormSubmission = (data) => async (dispatch) => {
 export const preSubmission1= () => async (dispatch) => {
   try {
     dispatch({ type: PRE_SUBMISSIONS_REQUEST});
-    const res = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/user/presubmissionform1', {
-      withCredentials: true, // Include cookies in the request
-    });
+    let tokenUser = localStorage.getItem('tokenUser');
+axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
+    const res = await axiosInstance.get('/api/v1/user/presubmissionform1');
     dispatch({
       type: PRE_SUBMISSIONS_SUCCESS,
       payload: res
@@ -206,9 +228,9 @@ export const preSubmission1= () => async (dispatch) => {
 export const preSubmission2= () => async (dispatch) => {
   try {
     dispatch({ type: PRE_SUBMISSIONS_REQUEST});
-    const res = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/user/quartersubmission', {
-      withCredentials: true, // Include cookies in the request
-    });
+    let tokenUser = localStorage.getItem('tokenUser');
+axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
+    const res = await axiosInstance.get('/api/v1/user/quartersubmission');
     dispatch({
       type: PRE_SUBMISSIONS_SUCCESS,
       payload: res
@@ -224,9 +246,9 @@ export const preSubmission2= () => async (dispatch) => {
 export const exportQuarterData = () => async (dispatch) => {
   try {
     dispatch({ type: FORM_DATA_REQUEST });
-    const { data } = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/quarterformdata', {
-      withCredentials: true // Include cookies in the request
-    });
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const { data } = await axiosInstance.get('/api/v1/admin/quarterformdata');
     dispatch({
       type: FORM_DATA_SUCCESS,
       payload: data.data
@@ -247,8 +269,9 @@ export const modifyTime = (time) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const data = await axios.put(process.env.REACT_APP_API_URL + '/api/v1/form/modifytime', time, {
-      withCredentials: true, // Include cookies in the request
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const data = await axiosInstance.put('/api/v1/form/modifytime', time, {
       ...config
     });
     dispatch({
@@ -271,8 +294,9 @@ export const modifyTime2 = (time) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const data = await axios.put(process.env.REACT_APP_API_URL + '/api/v1/form/modifytime2', time, {
-      withCredentials: true, // Include cookies in the request
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const data = await axiosInstance.put('/api/v1/form/modifytime2', time, {
       ...config
     });
     dispatch({
@@ -291,10 +315,10 @@ export const count1 = () => async (dispatch) => {
   try {
     dispatch({ type: GET_COUNT_REQUEST });
     
-    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/submissioncount', {
-      withCredentials: true
-    });
+    const data = await axiosInstance.get('/api/v1/admin/submissioncount');
  //.   console.log(JSON.stringify(data));
+ let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     dispatch({
       type: GET_COUNT_SUCCESS,
       payload: data
@@ -310,11 +334,10 @@ export const count1 = () => async (dispatch) => {
 export const count2 = () => async (dispatch) => {
   try {
     dispatch({ type: GET_COUNT_REQUEST });
-
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     
-    const data = await axios.get(process.env.REACT_APP_API_URL + '/api/v1/admin/quartersubmissioncount', {
-      withCredentials: true
-    });
+    const data = await axiosInstance.get('/api/v1/admin/quartersubmissioncount');
     dispatch({
       type: GET_COUNT_SUCCESS,
       payload: data
@@ -330,7 +353,8 @@ export const count2 = () => async (dispatch) => {
 export const deleteAll1 = (password,keyword='',currentPage=1) => async (dispatch) => {
   try {
     dispatch({ type: SUBMISSIONS1_REQUEST });
-    
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     
     const config = {
       headers: {
@@ -338,15 +362,12 @@ export const deleteAll1 = (password,keyword='',currentPage=1) => async (dispatch
       }
     };
     
-    await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall1',{password} ,{
-      withCredentials: true,
+    await axiosInstance.post('/api/v1/admin/deleteall1',{password} ,{
       ...config
     });
     let link =  `/api/v1/admin/form1submissions?keyword=${keyword}&page=${currentPage}`;
   
-    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
-      withCredentials: true
-    });
+    const data = await axiosInstance.get(link);
     dispatch({
       type: SUBMISSIONS1_SUCCESS,
       payload: data
@@ -368,16 +389,15 @@ export const deleteAll2 = (password,keyword='',currentPage=1) => async (dispatch
         'Content-Type': 'application/json'
       }
     };
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     
-    await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteall2',{password} ,{
-      withCredentials: true,
+    await axiosInstance.post('/api/v1/admin/deleteall2',{password} ,{
       ...config
     });
     let link =  `/api/v1/admin/form2submissions?keyword=${keyword}&page=${currentPage}`;
   
-    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
-      withCredentials: true
-    });
+    const data = await axiosInstance.get(link);
    
     dispatch({
       type: SUBMISSIONS2_SUCCESS,
@@ -393,12 +413,12 @@ export const deleteAll2 = (password,keyword='',currentPage=1) => async (dispatch
 export const form1submissions = (keyword='',currentPage=1) => async (dispatch) => {
   try {
     dispatch({ type: SUBMISSIONS1_REQUEST });
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     
     let link =  `/api/v1/admin/form1submissions?keyword=${keyword}&page=${currentPage}`;
   
-    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
-      withCredentials: true
-    });
+    const data = await axiosInstance.get(link);
    
     dispatch({
       type: SUBMISSIONS1_SUCCESS,
@@ -415,12 +435,12 @@ export const form1submissions = (keyword='',currentPage=1) => async (dispatch) =
 export const form2submissions = (keyword='',currentPage=1) => async (dispatch) => {
   try {
     dispatch({ type: SUBMISSIONS2_REQUEST });
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     
     let link =  `/api/v1/admin/form2submissions?keyword=${keyword}&page=${currentPage}`;
   
-    const data = await axios.get(process.env.REACT_APP_API_URL + link, {
-      withCredentials: true
-    });
+    const data = await axiosInstance.get( link);
    // console.log(data);
     dispatch({
       type: SUBMISSIONS2_SUCCESS,
@@ -436,14 +456,14 @@ export const form2submissions = (keyword='',currentPage=1) => async (dispatch) =
 export const deleteInform1= (_id) => async (dispatch) => {
   try {
     dispatch({ type: SUBMISSIONS1_REQUEST });
-    
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    const data = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteIn1', {_id:_id},{
-      withCredentials: true,
+    const data = await axiosInstance.post( '/api/v1/admin/deleteIn1', {_id:_id},{
       ...config
     });
    
@@ -467,8 +487,9 @@ export const deleteInform2= (_id) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     };
-    const data = await axios.post(process.env.REACT_APP_API_URL + '/api/v1/admin/deleteIn2', {_id:_id},{
-      withCredentials: true,
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
+    const data = await axiosInstance.post('/api/v1/admin/deleteIn2', {_id:_id},{
       ...config
     });
    

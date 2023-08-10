@@ -32,9 +32,13 @@ const Home = () => {
   const { choices, sTime, eTime } = useSelector((state) => state.quarter);
 
   const pictureSources = [
-    "https://www.nitt.edu/home/about/Admin-Block-1.JPG",
-    "https://www.nitt.edu/home/Octagon.jpg",
-    "https://www.nitt.edu/home/NITT-Main-Gate.JPG",
+    "/images/img8.JPG",
+    "/images/img1.jpg",
+    "/images/img2.JPG",
+    "/images/img3.JPG",
+    "/images/img4.jpg",
+    "/images/img5.JPG",
+    "/images/img6.JPG"
   ];
   const [isVisible, setIsVisible] = useState(true);
 

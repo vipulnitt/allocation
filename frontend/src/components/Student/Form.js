@@ -333,7 +333,6 @@ const Form = () => {
               type="text"
               name="remarks"
               value={formData.remarks}
-              required
               onChange={handleChange}
             />
 

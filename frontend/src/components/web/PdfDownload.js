@@ -105,23 +105,47 @@ return(
           </View>
 
          
-          <View style={{marginTop:"2px"}}>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Name:  {modelData.modelData.name}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Staff Number:  {modelData.modelData.staffNumber}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Designation:  {modelData.modelData.designation}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Department:  {modelData.modelData.department}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Scale of Pay:  {modelData.modelData.scalePay}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Basic Pay drawn per Month:  {modelData.modelData.basicPay}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Pay Level:  {modelData.modelData.gradePay}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Date of Joining Institute:  {modelData.modelData.joiningInstitute}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Date of Joining Cadre:  {modelData.modelData.joiningCadre}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Present Residential Address:  {modelData.modelData.presentResidentialAddress}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Marital Status:  {modelData.modelData.maritalStatus}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Application Type:  {modelData.modelData.applicationType}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> SC Or ST:  {modelData.modelData.scOrST}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Date of occupation in the present quarters:  {modelData.modelData.occupationDate}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Remarks:  {modelData.modelData.remarks}</Text>
-         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}> Priority List (StreetNumber / QuarterNumber)</Text>
+          <View style={{marginTop:"2px" ,flexDirection:'row'}}>
+          <View style={{marginTop:"2px" ,flex:1}}>
+          <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Name:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Staff Number:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Designation:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Department:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Scale of Pay:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Basic Pay drawn per Month:</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Pay Level:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Date of Joining Institute: </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Date of Joining Cadre:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Present Residential Address:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Marital Status:</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Application Type:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> SC Or ST:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Presently Allocated Quarter:  </Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Date of occupation in the present quarters:</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Remarks: </Text>
+          </View>
+          <View style={{marginTop:"2px" ,flex:1}}>
+          <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.name+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.staffNumber+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.designation+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.department+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.scalePay+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.basicPay+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.gradePay+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.joiningInstitute+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.joiningCadre+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.presentResidentialAddress+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.maritalStatus+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.applicationType+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.scOrST+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.quarterPresentlyAllocated+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.occupationDate+" "}</Text>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>{modelData.modelData.remarks+" "}</Text>
+          </View>
+        
+         </View>
+         <View>
+         <Text style={{fontSize:12, textAlign:'left', marginTop:'4px',  fontFamily: 'Helvetica-Bold'}}> Priority List (StreetNumber / QuarterNumber)</Text>
          {modelData.modelData.priorityChoices.map((choice, index) => (
              
              <Text style={{fontSize:12, textAlign:'left', marginTop:'4px', marginLeft:"1px"}}>{index+1}. { choice.choice.streetNumber} / { choice.choice.quarterNumber}</Text>
@@ -134,7 +158,7 @@ return(
         <View>
           
 <Text style={{fontSize:13, textAlign:'center', marginTop:'4px', fontFamily: 'Helvetica-Bold',  fontWeight: 'bolder'}} >CERTIFICATE</Text>
-<Text style={{fontSize:12, textAlign:'left', marginTop:'4px'}} >This is to certify that I .......................................................... son/daughter/wife/husband of .......................................................... am working as ......................................... in the section/department of ................................ hereby state that I and/or my spouse do not own and/or inherit a house within a prohibited radial distance of 8 km from the Institute.</Text>
+<Text style={{fontSize:12, textAlign:'left', marginTop:'4px'  ,lineHeight: 1.3 }} >This is to certify that I .......................................................... son/daughter/wife/husband of .......................................................... am working as ......................................... in the section/department of ................................ hereby state that I and/or my spouse do not own and/or inherit a house within a prohibited radial distance of 8 km from the Institute.</Text>
         </View>
       <View>
       
@@ -142,7 +166,7 @@ return(
       <Text  style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>Name of Applicant:</Text>
       <Text  style={{fontSize:12, textAlign:'right', marginTop:'4px', marginRight:"100px"}}>Signature:</Text>
      </View>
-     <View style={{flex:'1',marginTop:"10px"}}>
+     <View style={{flex:'1',marginTop:"20px"}}>
       <Text  style={{fontSize:12, textAlign:'left', marginTop:'4px'}}>Place:</Text>
       <Text  style={{fontSize:12, textAlign:'right', marginTop:'4px', marginRight:"100px"}}>Date:</Text>
      </View>

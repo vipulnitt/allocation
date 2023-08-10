@@ -5,8 +5,8 @@ const UserController = require("../models/user");
 const ErrorHandler = require("../utils/errorHandler");
 // Checks if user is authenticated or not.
 exports.isAuthenticated = catchAsyncError(async (req,res,next)=>{
-    const token = req.cookies.tkn;
-    console.log(req.cookies);
+    const token = req.headers.token;
+   
      
     if(!token){
         return next(new ErrorHandler('Login first to access this resource.'));
@@ -17,9 +17,8 @@ exports.isAuthenticated = catchAsyncError(async (req,res,next)=>{
     next();
 })
 exports.isAuthenticatedUser = catchAsyncError(async (req,res,next)=>{
-    const  tokenUser = req.cookies.tokenUser;
-    console.log(JSON.stringify(req.cookies))
-    console.log(tokenUser)
+    const  tokenUser = req.headers.tokenuser;
+     console.log(JSON.stringify(req.headers));
     if(!tokenUser){
         return next(new ErrorHandler('Login first to access this resource.'));
     }

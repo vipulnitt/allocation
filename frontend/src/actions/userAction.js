@@ -13,9 +13,21 @@ import { LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../c
 const apiURL = process.env.REACT_APP_API_URL;
 
 const axiosInstance = axios.create({
-  baseURL: apiURL,
-  withCredentials: true // Set withCredentials to true for all requests
+  baseURL: apiURL
 });
+let tokenUser = localStorage.getItem('tokenUser');
+axiosInstance.interceptors.request.use(
+  (config) => {
+    if (tokenUser) {
+      config.headers['tokenUser'] = `${tokenUser}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 
 
 export const  otpRequest = (email)=> async(dispatch)=>{
@@ -28,7 +40,7 @@ export const  otpRequest = (email)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-    const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/login',{email},config);
+    const {data} = await axiosInstance.post('/api/v1/user/login',{email},config);
     dispatch({
         type: OTP_SUCCESS,
         payload: data
@@ -51,8 +63,10 @@ export const  otpVerify = (otp,email)=> async(dispatch)=>{
             'content-type': 'application/json'
         }
     }
-
-    const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/verifyotp',{email,otp},config);
+    
+    const {data} = await axiosInstance.post('/api/v1/user/verifyotp',{email,otp},config);
+    axiosInstance.defaults.headers.common['tokenUser'] = `${data.tokenUser}`;
+    localStorage.setItem('tokenUser', data.tokenUser);
     dispatch({
         type: OTP_VERIFY_SUCCESS,
         payload: data
@@ -73,11 +87,12 @@ export const  logoutUser = ()=> async(dispatch)=>{
         type: LOGOUT_USER_REQUEST
     })
 
-
-    const {data} = await axiosInstance.post(process.env.REACT_APP_API_URL+'/api/v1/user/logout');
+    
+    const {data} = await axiosInstance.post('/api/v1/user/logout');
     dispatch({
         type: LOGOUT_USER_SUCCESS
       });
+      localStorage.removeItem('tokenUser');
     } catch (error) {
       dispatch({
         type: LOGOUT_USER_FAIL,

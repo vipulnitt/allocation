@@ -24,7 +24,7 @@ import logo2 from './nitt.png';
 import { logout } from '../../../actions/adminAction';
 
 export default function Navbar() {
-  const screenSize = 580;
+  const screenSize = 880;
   const [menu, setMenu] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -107,7 +107,7 @@ export default function Navbar() {
                 </MenuItems>
                 <MenuItems togglemenu={toggleMenu}    onClick={() => setToggleMenu((!toggleMenu))} ss={screenSize}>
                   <NavLink to="/admin/login" style={{ color: 'white' }}>
-                    Login
+                    Admin
                   </NavLink>
                 </MenuItems>
               </>
