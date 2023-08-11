@@ -7,6 +7,7 @@ import NoticeBoard from "./NoticeBoard";
 import SliderComponent from "./SliderComponent";
 import { fetchNorms, fetchQuarter } from "../../actions/formAction";
 import '../Layout/home.css'
+import { logoutUser } from "../../actions/userAction";
 
 
 const Home = () => {
@@ -30,7 +31,7 @@ const Home = () => {
     dispatch(fetchQuarter());
   }, [dispatch]);
   const { choices, sTime, eTime } = useSelector((state) => state.quarter);
-
+  
   const pictureSources = [
     "/images/img8.JPG",
     "/images/img1.jpg",
@@ -47,6 +48,7 @@ const Home = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    dispatch(logoutUser());
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };

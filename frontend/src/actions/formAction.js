@@ -314,11 +314,11 @@ export const modifyTime2 = (time) => async (dispatch) => {
 export const count1 = () => async (dispatch) => {
   try {
     dispatch({ type: GET_COUNT_REQUEST });
-    
+    let token= localStorage.getItem('token');
+    axiosInstance.defaults.headers.common['token'] = `${token}`;
     const data = await axiosInstance.get('/api/v1/admin/submissioncount');
  //.   console.log(JSON.stringify(data));
- let token= localStorage.getItem('token');
-    axiosInstance.defaults.headers.common['token'] = `${token}`;
+
     dispatch({
       type: GET_COUNT_SUCCESS,
       payload: data

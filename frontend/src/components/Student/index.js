@@ -59,7 +59,7 @@ const Student = (formType) => {
         if(isUserAuthenticated) {
           
           navigate('/student/form');
-         
+           
         }
         if(error){
           
