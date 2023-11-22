@@ -34,6 +34,7 @@ import {
     PRE_SUBMISSIONS_SUCCESS,
     PRE_SUBMISSIONS_FAIL
 } from '../constants/formConstant';
+import { CLEAR_DATA } from '../constants/userConstant';
 
 export const normFetch = (state ={formDetails:{}},action)=>{
     switch(action.type){
@@ -129,6 +130,7 @@ export const formSubmission = (state ={res:{}},action)=>{
                     error: action.payload
                 }
         case CLEAR_ERRORS: 
+        case CLEAR_DATA:
           return{
                     loading:false,
                     data: null,

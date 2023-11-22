@@ -10,6 +10,7 @@ const Quarter = () => {
     const [otp,setOtp]= useState('');
     const [emailToSend,setEmail] = useState('');
     const dispatch = useDispatch();
+    const [otpHandle,setOtpHandle] = useState(false);
 
     
     function handleOtpClick(e)
@@ -54,7 +55,9 @@ const Quarter = () => {
     const {otpSent,email} = useSelector(state=>state.otp);
     function handleClick(e) {
         e.preventDefault();
+        setOtpHandle(false);
         dispatch(otpVerify(otp,email));
+       
       }
       const {isUserAuthenticated,error} = useSelector(state=>state.userAuth);
       useEffect(()=>{
@@ -74,10 +77,17 @@ const Quarter = () => {
             dispatch(clearErrors());
         }
     },[dispatch,isUserAuthenticated,error]);
+
+    useEffect(()=>{
+      if(otpSent)
+      {
+       setOtpHandle(true);
+      }
+ },[otpSent]);
+    
       /**/
-    if(otpSent)
-    {  
-      
+      if(otpHandle)
+      {
       
        return (<>
        <div className="small-container mt-4">

@@ -1,6 +1,5 @@
 
 import React, { useEffect } from "react";
-import Header from './components/Layout/Header';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Layout/Home";
@@ -31,6 +30,8 @@ const App = () => {
   useEffect(()=>{
     store.dispatch(loadUser());
   },[]);
+  
+
  return (
 
  <div className="App ">

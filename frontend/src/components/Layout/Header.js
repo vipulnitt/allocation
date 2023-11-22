@@ -9,6 +9,13 @@ const Header = () => {
   const {admin,loading} =  useSelector(state=>state.auth);
   const {isUserAuthenticated,error} = useSelector(state=>state.userAuth);
   const dispatch = useDispatch();
+  const {isAuthenticated}= useSelector(state=>state.auth);
+  useEffect(()=>{
+    if(isAuthenticated) {
+      dispatch(loadUser());
+      navigate('/admin');
+    }
+  },[isAuthenticated]);
 
   const logoutHandler = ()=>{
     dispatch(logout());

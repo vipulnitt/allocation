@@ -46,7 +46,7 @@ services:
       - mongoData:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_ROOT_PASSWORD=hbsjbs89usjsj3u9
     command: ["mongod", "--auth"] # Enable MongoDB authentication
     restart: unless-stopped
 

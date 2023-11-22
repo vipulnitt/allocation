@@ -19,7 +19,5 @@ _id:String,
   }
  ]
 },{_id:false});
-
 const QuarterDetails = mongoose.model('quarterDetail',quarterDetailSchema);
-
 module.exports = QuarterDetails;

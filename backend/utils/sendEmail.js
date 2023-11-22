@@ -1,105 +1,32 @@
-const AWS = require('aws-sdk');
+const nodemailer = require('nodemailer');
 
+const sendEmail = async (options) => {
+  // Replace the following placeholders with your own SMTP server credentials
+  const transporter = nodemailer.createTransport({
 
-const sendEmail = async options => {
-    const SES_CONFIG = {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_KEY,
-        region: process.env.AWS_REGION
-    }
-    const AWS_SES = new AWS.SES(SES_CONFIG);
-    
-    console.log(JSON.stringify(SES_CONFIG)+" xx");
-   let params = {
-    Source:process.env.SENDER_EMAIL,
-    Destination:{
-        ToAddresses:[options.email]
+    host: process.env.SMTP_HOST, // Replace with your SMTP server address
+    port: process.env.SMTP_PORT, // Replace with your SMTP server port
+    secure: true, // Set to true if using a secure connection (e.g., TLS)
+    auth: {
+      user: process.env.SMTP_USERNAME, // Replace with your SMTP username
+      pass: process.env.SMTP_PASSWORD, // Replace with your SMTP password
     },
-    ReplyToAddresses:[],
-    Message:{
-        Body:{
-            Text:{Charset:'UTF-8',
-            Data:options.message
-        }
-        },
-        Subject:{
-            Charset:'UTF-8',
-            Data:options.subject
-        }
-    }
-   }
-   try{
-  //  const res = await AWS_SES.sendEmail(params).promise();
-    console.log("Sent");
-   } catch (error){
-    console.log("Error: " + error);
-   }
+  });
+
+  const mailOptions = {
+    from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_EMAIL}>`,
+    to: options.email,
+    cc: ["quarters@nitt.edu"],
+    subject: options.subject,
+    text: options.message,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent:', info.response);
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
 };
 
-
 module.exports = sendEmail;
-// const eeClient = require('elasticemail-webapiclient').client;
- 
-
-// const sendEmail = async options =>{
-//   const option = {
-//     apiKey: process.env.API_KEY,
-//     apiUri: 'https://api.elasticemail.com/',
-//     apiVersion: 'v2'
-// }
- 
-// const EE = new eeClient(option);
- 
-// // Load account data
-// EE.Account.Load().then(function(resp) {
-//     console.log(resp);
-// });
- 
-// const emailParams = {
-//     "subject": options.subject,
-//     "to": options.email,
-//     "from": process.env.SMTP_FROM_EMAIL,
-//     "body": options.message,
-//     "fromName": process.env.SMTP_FROM_NAME,
-//     "bodyType": 'Plain'
-// };
- 
-// // Send email
-// EE.Email.Send(emailParams)
-// .catch((err) => {
-//     throw new Error(err);
-// });
- 
-       
-//  }
- 
-//  module.exports = sendEmail;
-// const nodemailer = require('nodemailer');
-// const sendEmail = async options =>{
-
-//  console.log(process.env.SMTP_PORT+"Hello");
-//   let transporter = nodemailer.createTransport({
-//     host: process.env.SMTP_HOST,
-//     port: process.env.SMTP_PORT,
-//     secure:false,
-//     auth: {
-//       user: process.env.SMTP_EMAIL,
-//       pass: process.env.SMTP_PASSWORD
-//     }
-//   });
-//       const message ={
-//         from: `${process.env.SMTP_FROM_NAME} <${process.env.SMTP_FROM_EMAIL}>`,
-//         to: options.email,
-//         subject: options.subject,
-//         text: options.message
-//       }
-//       try{
-//         await transporter.sendMail(message);
-//       } catch(e)
-//       {
-//         console.log(e);
-//       }
-      
-// }
-
-// module.exports = sendEmail;

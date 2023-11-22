@@ -450,3 +450,29 @@ exports.deleteInForm1 = catchAsyncError(async (req, res, next) => {
 
 });
 
+exports.withdrawForm1 = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  const email = user.email;
+  const RollNo = email.substring(0, email.indexOf("@"));
+  console.log(RollNo);
+  const data = await ResearchScholarForm.findOneAndDelete({RollNo:RollNo});
+  res.status(200).json({
+    success: true,
+    data
+  });
+
+});
+
+exports.withdrawForm2 = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+  const email = user.email;
+  console.log(email);
+ 
+  const data = await Quarter.findOneAndDelete({email});
+  res.status(200).json({
+    success: true,
+    data
+  });
+
+
+});

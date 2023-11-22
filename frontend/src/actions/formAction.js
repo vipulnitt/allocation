@@ -33,6 +33,9 @@ import {
   PRE_SUBMISSIONS_REQUEST,
   PRE_SUBMISSIONS_SUCCESS,
   PRE_SUBMISSIONS_FAIL,
+  WITHDRAW_REQUEST,
+  WITHDRAW_SUCCESS,
+  WITHDRAW_FAIL,
 } from '../constants/formConstant';
 const apiURL = process.env.REACT_APP_API_URL;
 
@@ -225,6 +228,50 @@ axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
     });
   }
 };
+export const withdrawSubmission1= () => async (dispatch) => {
+  try {
+    dispatch({ type: WITHDRAW_REQUEST});
+    let tokenUser = localStorage.getItem('tokenUser');
+    axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
+    const res = await axiosInstance.post('/api/v1/user/withdrawform1');
+    dispatch({
+      type: WITHDRAW_SUCCESS,
+      payload: res
+    });
+    dispatch({
+      type:PRE_SUBMISSIONS_FAIL,
+      payload: null
+    });
+  } catch (error) {
+    dispatch({
+      type:WITHDRAW_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
+export const withdrawSubmission2= () => async (dispatch) => {
+  try {
+    dispatch({ type: WITHDRAW_REQUEST});
+    let tokenUser = localStorage.getItem('tokenUser');
+    axiosInstance.defaults.headers.common['tokenUser'] = `${tokenUser}`;
+    const res = await axiosInstance.post('/api/v1/user/withdrawform2');
+    dispatch({
+      type: WITHDRAW_SUCCESS,
+      payload: res
+    });
+    dispatch({
+      type:PRE_SUBMISSIONS_FAIL,
+      payload: null
+    });
+  } catch (error) {
+    dispatch({
+      type:WITHDRAW_FAIL,
+      payload: error.response.data.message
+    });
+  }
+};
+
 export const preSubmission2= () => async (dispatch) => {
   try {
     dispatch({ type: PRE_SUBMISSIONS_REQUEST});

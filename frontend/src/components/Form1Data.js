@@ -213,7 +213,6 @@ const Form1Data = () => {
                     <p>Contact: {submission.contact}</p>
                     <p>Submission Time: {new Date(""+submission.submissionTime).toLocaleString()}</p>
                     <button className='btn btn-success' onClick={()=>openPopup(submission)} >Show</button>
-                    <button className='btn btn-danger ml-3' onClick={()=>handleDelete(submission._id)} >Delete</button>
                   </div>
                 </div>
               ))}

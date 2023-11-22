@@ -2,8 +2,6 @@ import React from 'react';
 import './style.css';
 import logo from './logonew.png'
 import { Document, Page, Text, View, PDFDownloadLink, PDFViewer, StyleSheet, Image } from '@react-pdf/renderer';
-import { saveAs } from 'file-saver';
-
 const modelData = {
   name: "Vipul Patel",
   staffNumber: "10",
@@ -67,7 +65,7 @@ const styles = StyleSheet.create({
 
 
 const Pdfdownload = (modelData) => {
-  console.log(JSON.stringify(modelData));
+  
 return(
   <>
    <div>

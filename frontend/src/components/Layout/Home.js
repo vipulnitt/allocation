@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "./MetaData";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors } from "../../actions/adminAction";
+import { clearErrors, loadUser } from "../../actions/adminAction";
 import NoticeBoard from "./NoticeBoard";
 import SliderComponent from "./SliderComponent";
 import { fetchNorms, fetchQuarter } from "../../actions/formAction";
@@ -43,8 +43,6 @@ const Home = () => {
   ];
   const [isVisible, setIsVisible] = useState(true);
 
-
-
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -60,7 +58,7 @@ const Home = () => {
     };
   }, []);
   const isAndroidPhone = screenWidth <= 480; // 480px is a common width for Android phones
-  const isLessThan10Inch = screenWidth <= 1280; // Assuming 1280px as the width of a 10-inch diagonal
+  const isLessThan10Inch = screenWidth <= 1000; // Assuming 1280px as the width of a 10-inch diagonal
 
   return (
     <Fragment>

@@ -5,9 +5,10 @@ import {
     OTP_FAIL,
     OTP_VERIFY_REQUEST,
     OTP_VERIFY_SUCCESS,
-    OTP_VERIFY_FAIL
+    OTP_VERIFY_FAIL,
+    CLEAR_DATA
 } from '../constants/userConstant';
-import { CLEAR_ERRORS } from "../constants/formConstant";
+import { CLEAR_ERRORS, CLEAR_OTP } from "../constants/formConstant";
 import { LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../constants/adminConstant";
 
 const apiURL = process.env.REACT_APP_API_URL;
@@ -29,12 +30,14 @@ axiosInstance.interceptors.request.use(
 );
 
 
-
 export const  otpRequest = (email)=> async(dispatch)=>{
     try{
     dispatch({
         type: OTP_REQUEST
     })
+    dispatch({
+      type: CLEAR_DATA
+  })
     const config = {
         headers:{
             'content-type': 'application/json'
@@ -67,6 +70,9 @@ export const  otpVerify = (otp,email)=> async(dispatch)=>{
     const {data} = await axiosInstance.post('/api/v1/user/verifyotp',{email,otp},config);
     axiosInstance.defaults.headers.common['tokenUser'] = `${data.tokenUser}`;
     localStorage.setItem('tokenUser', data.tokenUser);
+    dispatch({
+      type: CLEAR_OTP
+  })
     dispatch({
         type: OTP_VERIFY_SUCCESS,
         payload: data

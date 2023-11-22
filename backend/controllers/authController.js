@@ -26,7 +26,7 @@ exports.loginAdmin = catchAsyncError(async (req, res, next)=>{
     if(!email||!password){
         return next(new ErrorHandler('Please enter email or password',400))
     }
-      console.log("xaam");
+  
     //finding user in database
     const admin = await Admin.findOne({email}).select('+password');
     if(!admin){

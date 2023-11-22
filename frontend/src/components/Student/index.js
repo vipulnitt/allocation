@@ -9,6 +9,7 @@ const Student = (formType) => {
     const navigate = useNavigate();
     const [otp,setOtp]= useState('');
     const [emailToSend,setEmail] = useState('');
+    const [otpHandle,setOtpHandle] = useState(false);
     const dispatch = useDispatch();
     function handleOtpClick(e)
     {
@@ -52,7 +53,9 @@ const Student = (formType) => {
     const {otpSent,email} = useSelector(state=>state.otp);
     function handleClick(e) {
         e.preventDefault();
+        setOtpHandle(false);
         dispatch(otpVerify(otp,email));
+        
       }
       const {isUserAuthenticated,error} = useSelector(state=>state.userAuth);
       useEffect(()=>{
@@ -73,28 +76,37 @@ const Student = (formType) => {
             dispatch(clearErrors());
         }
     },[dispatch,isUserAuthenticated,error]);
+
+
       /**/
-    if(otpSent)
-    {  
-      
-      
-       return (<>
-       <div className="small-container mt-4">
-        <form onSubmit={handleClick}>
-        <label htmlFor="Otp">Enter OTP</label>
-        <input
-          id="otp"
-          type="text"
-          name="OTP"
-          placeholder=""
-          value={otp}
-          onChange={(e)=>{setOtp(e.target.value)}}
-        />
-        <input style={{ marginTop: '12px',backgroundColor:'#041570' }} type="submit" value="Submit"  />
-        </form>
-       
-    </div>
-       </> );
+    useEffect(()=>{
+         if(otpSent)
+         {
+          setOtpHandle(true);
+         }
+    },[otpSent]);
+
+    
+
+    if(otpHandle)
+    {
+      return (<>
+        <div className="small-container mt-4">
+         <form onSubmit={handleClick}>
+         <label htmlFor="Otp">Enter OTP</label>
+         <input
+           id="otp"
+           type="text"
+           name="OTP"
+           placeholder=""
+           value={otp}
+           onChange={(e)=>{setOtp(e.target.value)}}
+         />
+         <input style={{ marginTop: '12px',backgroundColor:'#041570' }} type="submit" value="Submit"  />
+         </form>
+        
+     </div>
+        </> );
     }
  return (
     

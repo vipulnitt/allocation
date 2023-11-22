@@ -1,10 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchNorms, formSubmission, preSubmission1 } from '../../actions/formAction';
+import { fetchNorms, formSubmission, preSubmission1, withdrawSubmission1 } from '../../actions/formAction';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { logoutUser } from '../../actions/userAction';
 import { clearErrors } from '../../actions/adminAction';
+import PreviewComponent from './Preview';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Form = () => {
     tenureCompleted: '',
     remarks: '',
   });
-
+  const [preview,setPreview] = useState(null);
   useEffect(() => {
     dispatch(fetchNorms());
     dispatch(preSubmission1());
@@ -36,11 +37,11 @@ const Form = () => {
   const { norms, sTime, eTime, loading } = useSelector((state) => state.form);
   const { error, data } = useSelector((state) => state.formSubmission);
   const { submissions} = useSelector((state) => state.preSubmission);
-
+  
   useEffect(()=>{
      if(submissions)
      {
-      console.log(JSON.stringify(submissions));
+     // console.log(JSON.stringify(submissions));
     const temp={  Name: submissions.Name||'',
       Department: submissions.Department ||'',
       dateOfJoining: submissions.dateOfJoining||'',
@@ -66,7 +67,7 @@ const Form = () => {
     if (error) {
       Swal.fire({
         icon: 'error',
-        title: 'You can submit the form only once.',
+        title: 'Something wents wrong.',
         text: ``,
         showConfirmButton: false,
         timer: 1500,
@@ -83,8 +84,10 @@ const Form = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      dispatch(logoutUser());
-      navigate('/');
+     // dispatch(logoutUser());
+     //console.log(data.data.form);
+     setPreview(data.data.form);
+      
     }
   }, [error, data, dispatch, navigate]);
 
@@ -110,6 +113,29 @@ const Form = () => {
     
   };
 
+
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to withdraw the form!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, withdraw it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(withdrawSubmission1());
+        navigate('/');
+        
+      }
+    });
+  
+     
+    
+  };
+
   
 
   const handleChange = (e) => {
@@ -130,7 +156,47 @@ const Form = () => {
 
   return (
     <>
-      <div className="small-container">
+    {preview?<div>
+      <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-10">
+          <div className="card">
+            <div className="card-body">
+              <center><h5><strong>QUARTERS ALLOTMENTADVISORY COMMITTEE</strong><br></br>
+<strong>NATIONAL INSTITUTE OF TECHNOLOGY TIRUCHIRAPPALLI</strong></h5>
+<h6><u>APPLICATION FOR ALLOTMENT OF PG / QIP/ RSB QUARTERS</u></h6>
+</center>
+              
+            <PreviewComponent submissions={preview}/>
+            <input
+              style={{ marginLeft: '12px' }}
+              className="btn btn-success"
+              type="button"
+              onClick={()=>setPreview(null)}
+              value="Edit"
+            />
+
+            <input
+              style={{ marginLeft: '12px' }}
+              className="muted-button"
+              type="button"
+              onClick={handleCancel}
+              value="Close"
+            />
+
+             <input
+              style={{ marginLeft: '12px' }}
+              className="btn btn-danger"
+              type="button"
+              onClick={handleWithdraw}
+              value="Withdraw"
+            />
+           </div>
+           </div>
+           </div>
+           </div>
+           </div>
+      </div>:<><div className="small-container">
         <form onSubmit={handleSubmit}>
           <h1>Enter the details</h1>
           <label htmlFor="Name">Name</label>
@@ -371,9 +437,18 @@ const Form = () => {
               onClick={handleCancel}
               value="Cancel"
             />
+
+             <input
+              style={{ marginLeft: '12px' }}
+              className="btn btn-danger"
+              type="button"
+              onClick={handleWithdraw}
+              value="Withdraw"
+            />
           </div>
         </form>
-      </div>
+      </div></>}
+      
     </>
   );
 };

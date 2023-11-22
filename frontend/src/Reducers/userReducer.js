@@ -1,4 +1,5 @@
 import { LOGOUT_USER_FAIL, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from '../constants/adminConstant';
+import { CLEAR_OTP } from '../constants/formConstant';
 import {
     OTP_REQUEST,
     OTP_SUCCESS,
@@ -31,11 +32,21 @@ export const userOtpSent = (state ={otp:{}},action)=>{
                     email:null,
                     error: action.payload
                 }
+        case CLEAR_OTP:
+            return{
+                loading:false,
+                otpSent:false,
+                email:null,
+                error: action.payload
+            }
+        
+              
          default:
             return state;
     }
 
 }
+
 export const userAuth = (state = {user:{}},action) =>{
     switch(action.type){
         case OTP_VERIFY_REQUEST:

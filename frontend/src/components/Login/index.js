@@ -11,7 +11,7 @@ const Login =()  => {
   const [password,setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
- const {isAuthenticated,error, loading,token}= useSelector(state=>state.auth);
+ const {isAuthenticated,error, loading}= useSelector(state=>state.auth);
   useEffect(()=>{
     if(isAuthenticated) {
       dispatch(loadUser());
@@ -22,7 +22,12 @@ const Login =()  => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate('/admin');
+      setTimeout(() => {
+        window.location.reload(true); // true forces a reload from the server
+      }, 1000);
+    navigate('/admin');
+   
+
     }
     if(error){
       

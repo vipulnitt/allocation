@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { fetchQuarter, preSubmission2, quarterFormSubmission } from "../actions/formAction";
+import { fetchQuarter, preSubmission2, quarterFormSubmission, withdrawSubmission2 } from "../actions/formAction";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const QuartersForm = () => {
     if (error) {
       Swal.fire({
         icon: "error",
-        title: "You can submit the form only once.",
+        title: "Something wents wrong!.",
         text: ``,
         showConfirmButton: false,
         timer: 1500,
@@ -126,6 +126,28 @@ const QuartersForm = () => {
     dispatch(quarterFormSubmission(modelData));
   };
 
+  const handleWithdraw = (e) => {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to withdraw the form!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, withdraw it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(withdrawSubmission2());
+        navigate('/');
+        
+      }
+    });
+  
+     
+    
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -135,10 +157,14 @@ const QuartersForm = () => {
     navigate("/");
   };
   const formatDate = (date) => {
-    const parts = date.split("-");
-    const [year, month, day] = parts;
-    console.log(year+" "+month+" "+day);
-    return `${year}-${month}-${day}`;
+    if(date)
+    {
+      const parts = date.split("-");
+      const [year, month, day] = parts;
+      console.log(year+" "+month+" "+day);
+      return `${year}-${month}-${day}`;
+    }
+   
   };
   useEffect(()=>{
     
@@ -167,10 +193,11 @@ const QuartersForm = () => {
 
      }
   },[submissions,loading])
-  if(isSubmitted)
-  {
-    return <Pdfdownload modelData={data.data.form}/>
+  const handleClose=(e)=>{
+    e.preventDefault();
+    navigate('/');
   }
+ 
   
   if (!valid) {
     return (
@@ -179,9 +206,28 @@ const QuartersForm = () => {
   }
  
   return (
+
+
     <Fragment>
-      
-      <div className="small-container">
+      {isSubmitted?<>
+    <div style={{ marginRight: "20px",textAlign: "right", }} >
+            <input
+              style={{  marginRight: "12px" }}
+              className="btn btn-danger"
+              type="button"
+              onClick={handleWithdraw}
+              value="Withdraw"
+            />
+             <input
+              style={{ marginRight: "12px",textAlign: "right" }}
+              className="muted-button"
+              type="button"
+              onClick={handleClose}
+              value="Close"
+            />
+    </div>
+    
+    <Pdfdownload modelData={data.data.form}/></>: <div className="small-container">
         <h2>
           APPLICATION FOR ALLOTMENT / RENEWAL / CHANGE OF RESIDENTIAL QUARTERS
         </h2>
@@ -372,6 +418,7 @@ const QuartersForm = () => {
             <option value="" disabled hidden>
               Select an Option
             </option>
+            <option value="No">NO</option>
             <option value="SCt">SC</option>
             <option value="ST">ST</option>
           </select>
@@ -451,9 +498,19 @@ const QuartersForm = () => {
               onClick={handleCancel}
               value="Cancel"
             />
+
+<input
+              style={{ marginLeft: '12px' }}
+              className="btn btn-danger"
+              type="button"
+              onClick={handleWithdraw}
+              value="Withdraw"
+            />
           </div>
         </form>
-      </div>
+      </div>}
+      
+     
     </Fragment>
   );
 };
