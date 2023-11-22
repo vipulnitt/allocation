@@ -10,7 +10,17 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://allocation-sigma.vercel.app',
+    credentials: true, // Enable CORS credentials (cookies, authorization headers, etc.)
+  }));
+
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Origin', 'https://allocation-sigma.vercel.app');
+    next();
+  });
+
 
 
 const admin = require('./routes/admin');
