@@ -11,13 +11,13 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors({
-    origin: 'https://allocation-sigma.vercel.app',
+    origin: 'https://allocation-r2jv.vercel.app',
     credentials: true, // Enable CORS credentials (cookies, authorization headers, etc.)
   }));
 
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Origin', 'https://allocation-sigma.vercel.app');
+    res.header('Access-Control-Allow-Origin', 'https://allocation-r2jv.vercel.app');
     next();
   });
 
